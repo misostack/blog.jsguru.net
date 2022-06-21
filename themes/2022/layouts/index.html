@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+<h1>Home Page</h1>
+
+{{ range first .Site.Params.home_post_limit ( sort (where .Site.Pages "Params.type" "post") "Date" "desc" ) }}            
+<li class="row-section-content-item">
+    <a class="row-section-content-item-link" href="{{ .Permalink }}">{{ .Title }} - {{ .PublishDate.Format "02 Jan, 2006" }}</a>
+    {{ range $category:= .Params.categories }}
+    <a class="category-tag category-{{ $category }}" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
+    {{ end }}
+</li>
+{{ end }} 
+{{end }}

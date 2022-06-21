@@ -1,0 +1,15 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+theme = '2022'
+[params]
+    name = "MISOSTACK"
+    description = "NHATKIDUAN.MISOSTACK.COM là một blog để lưu lại các kiến thức, kinh nghiệm trong quá trình xây dựng một website hay ứng dụng"
+    keywords = "nhat ki du an"
+    image = "/pages/home/nhat-ki-du-an.jpg"
+    blog_pager = 10
+    note_pager = 10
+    article_pager = 10
+    home_post_limit = 10
+[taxonomies]
+    category = "categories"

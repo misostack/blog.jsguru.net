@@ -1,0 +1,12 @@
+{{ define "main" }}
+    <article class="article article-scrollby" data-target="#article-scrollpy">
+        <img src="{{ .Params.Image | absURL }}" class="img-responsive" alt="{{ .Title }}" />
+        <h1>{{ .Title }}</h1>
+        <p>
+            {{ range $category:= .Params.categories }}
+            <a class="category-tag category-{{ $category }}" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
+            {{ end }}
+        </p>
+        {{ .Content }}
+    </article>
+{{ end }}
