@@ -2,4 +2,4 @@
 Open system environment variable Add new hugo path Add hugo path to path Test
 hugo --help [x] Create new hugo site hugo new site blog.jsguru.net --force [x] Setup gh-pages for hugo https://github.com/marketplace/actions/hugo-setup
 .github\workflows\gh-pages.yml
-name: GitHub Pages on: push: branches: - main # Set a branch to deploy pull_request: jobs: deploy: runs-on: ubuntu-20.</description></item></channel></rss>
+name: GitHub Pages on: push: branches: - main # Set a branch to deploy pull_request: jobs: deploy: runs-on: ubuntu-20.</description></item><item><title>Setup NodeJS Development Environment in 5 Minutes</title><link>//blog.jsguru.net/post/setup-nodejs-development-enviroment-in-5-minutes/</link><pubDate>Tue, 21 Jun 2022 15:43:50 +0700</pubDate><guid>//blog.jsguru.net/post/setup-nodejs-development-enviroment-in-5-minutes/</guid><description>Installation https://nodejs.org/en/download/</description></item></channel></rss>
