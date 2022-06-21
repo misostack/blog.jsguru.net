@@ -37,15 +37,62 @@ hugo --help
 hugo new site blog.jsguru.net --force
 ```
 
-### [x] Install new theme
+### [x] Setup gh-pages for hugo
+
+https://github.com/marketplace/actions/hugo-setup
+
+.github\workflows\gh-pages.yml
+
+```yml
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Set a branch to deploy
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.91.2"
+          # extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+```
+
+### [x] Add your github page
+
+![image](https://user-images.githubusercontent.com/31009750/174761832-efdb48f3-9a7c-4ce3-8283-5312d28a7bca.png)
+
+### [x] Config DNS
+
+![image](https://user-images.githubusercontent.com/31009750/174761637-4baeff74-14da-4715-9751-25b2210694e0.png)
 
 ### [x] Add new post
 
-```
+```bash
 hugo new [archtype]/[post-name].md "Post title"
-```
+# archtype === 'post'
 
-- [ ] Add your github page
-- [ ] Config DNS
-- [ ] Test
-- [ ] Add new post
+hugo new post/hello.md "hello"
+```
