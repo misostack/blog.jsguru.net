@@ -1,0 +1,150 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size:20px
+}
+@media (min-width:420px) {
+  html {
+    font-size:18px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-heading font-bold;
+}
+
+h6 {
+  @apply text-xs;
+}
+h5 {
+  @apply text-xs;
+}
+h4 {
+  @apply text-sm;
+}
+h3 {
+  @apply text-base;
+}
+h2 {
+  @apply text-2xl;
+}
+h1 {
+  @apply text-3xl;
+}
+
+.clearfix:after {
+  clear: both;
+  content: ".";
+  display: block;
+  width: 0px;
+  height: 0px;
+}
+
+.container {
+  @apply max-w-screen-xl px-4 py-4 mx-auto;
+}
+
+.body-nav-fixed {
+  @apply pt-24;
+}
+.nav-fixed {
+  @apply fixed top-0 left-0 right-0;
+}
+
+.body-nav-fixed.admin-bar .nav-fixed{
+  top: 32px;
+}
+
+.nav-default {
+  @apply bg-white border-b drop-shadow-md;
+}
+
+.nav-menu {
+  @apply flex flex-wrap basis-full md:basis-auto overflow-hidden items-center;
+  &-link {
+    @apply text-sm basis-full md:basis-auto px-2 py-2 leading-4 font-semibold text-gray-500 capitalize hover:text-primary;
+  }
+  &-search-bar{
+    @apply px-2;
+    input[name="s"]{
+      @apply text-sm py-2 w-40 px-4;
+    }
+  }
+}
+
+.section {
+  @apply py-8;
+}
+
+.hero-section {
+  @apply text-center;
+  &-heading {
+    @apply text-3xl font-heading font-bold mb-4;
+  }
+  &-content {
+    @apply leading-6 text-lg;
+  }
+}
+
+.card-post {
+  @apply p-2;
+  &-default {
+    @apply overflow-hidden rounded-lg shadow-lg;
+  }
+  &-category {
+    @apply text-sm text-gray-500 hover:text-primary;
+  }
+  &-image {
+    @apply object-cover w-full h-48;
+  }
+  &-date {
+    @apply text-sm;
+  }
+  &-description {
+    @apply py-4;
+  }
+  &-readmore-link {
+    @apply font-bold hover:text-primary;
+  }
+}
+
+.pagination {
+  @apply bg-white py-3 flex items-center justify-between;
+  &-mobile {
+    @apply flex-1 flex justify-between sm:hidden;
+  }
+  &-desktop {
+    @apply hidden sm:flex-1 sm:flex sm:items-center sm:justify-between;
+  }
+  &-prev {
+    @apply relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50;
+  }
+  &-next {
+    @apply ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50;
+  }
+  &-pager {
+    @apply relative z-0 inline-flex rounded-md shadow-sm -space-x-px;
+    .nav-links{
+      @apply inline-flex;
+      a{
+        @apply h-10 px-5 text-gray-600 transition-colors duration-150 bg-white hover:bg-lime-100 py-2;
+      }
+      .current{
+        @apply h-10 px-5 text-white transition-colors duration-150 bg-primary py-2;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ baseURL = '//blog.jsguru.net'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = '2022'
+ignoreFiles = ['\assets\node_modules\.*']
 [params]
     name = "MISOSTACK"
     description = "NHATKIDUAN.MISOSTACK.COM là một blog để lưu lại các kiến thức, kinh nghiệm trong quá trình xây dựng một website hay ứng dụng"
