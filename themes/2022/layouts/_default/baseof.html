@@ -6,49 +6,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="home" href="{{ "" | absURL }}" />
     <meta name="generator" content="jsguru cms" />
-    {{ if hugo.IsProduction }}
-      {{ $mainStyle := resources.Get "themes/2022/public/main.css" }}
-      <link rel="stylesheet" href="{{$mainStyle.Permalink}}" />      
-    {{ end }} 
-    
+
+    {{ $themePath := "themes/2022/public/" }}
     {{ if not hugo.IsProduction }}
-      {{ $mainStyle := resources.Get "themes/2022/dist/main.css" }}
-      <link rel="stylesheet" href="{{$mainStyle.Permalink}}" />    
+      {{ $themePath = "themes/2022/dist/" }}
     {{ end }}
 
-    <title>Hello, world!</title>
+    <!-- Load stylesheets -->
+    {{ range $style := .Site.Data.assets.styles }}
+      {{ if eq $style.theme "2022" }}
+        {{ $mainStylePath := printf "%s" $style.name | printf "%s%s" $themePath  | printf "%s" }}      
+        {{ $mainStyle := resources.Get $mainStylePath }}
+        <link rel="stylesheet" href="{{$mainStyle.Permalink}}" />
+      {{ end }}       
+    {{ end }}    
+
+    <title>{{ .Site.Title }}</title>
   </head>
   <body class="body-nav-fixed">
     <nav class="nav-fixed nav-default z-50">
       <div class="container">
         <div class="nav-container flex flex-wrap justify-between items-center">
           <a href="#" class="nav-brand inline-block">
-            <img class="h-16" src="src/assets/images/2phut-logo.png" 
+            {{ $logo := resources.GetMatch "themes/2022/src/assets/images/2phut-logo.png" }}
+            <img class="h-16" src="{{ $logo.Permalink }}" 
             alt="Stunning" />
           </a>
-          <a href="javascript:void(0);" data-menu="#menu-main_menu" class="nav-menu-toggle md:hidden"><span class="material-icons">menu</span></a>
-          
+          <a href="javascript:void(0);" data-menu="#menu-main_menu" class="nav-menu-toggle"><span
+            class="material-icons">menu</span></a>
+
+          <ul id="menu-main_menu" class="nav-menu h-0 md:h-auto">
+            <form class="nav-menu-search-bar md:hidden relative">
+              <button class="nav-menu-search-bar-search-btn absolute h-full">
+                <svg class="w-3 h-3 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z">
+                  </path>
+                </svg>
+              </button>
+              <input name="s" type="text" class="w-full" />
+            </form>
+            <li class="nav-menu-item">
+              <a href="#" class="nav-menu-link">Giới thiệu <span class="material-icons">keyboard_arrow_down</span></a>
+              <ul class="sub-menu">
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Về Chúng tôi</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tuyển dụng</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Đội ngũ</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Liên hệ</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Chính sách bảo mật</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Điều khoản sử dụng</a></li>
+              </ul>
+            </li>
+            <li class="nav-menu-item">
+              <a href="" class="nav-menu-link">Dịch vụ <span class="material-icons">keyboard_arrow_down</span></a>
+              <ul class="sub-menu">
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Thiết kế website</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Outsourcing</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tối ưu hóa SEO</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Xây dựng landing page</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tích hợp các công cụ phân tích</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Báo cáo thời gian thực</a></li>
+                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tích hợp API</a></li>
+              </ul>
+            </li>
+            <li class="nav-menu-item"><a href="" class="nav-menu-link">Tuyển dụng</a></li>
+            <li class="nav-menu-item"><a href="" class="nav-menu-link">Thông tin</a></li>
+            <li class="nav-menu-item"><a href="" class="nav-menu-link">Liên hệ</a></li>
+            <form class="nav-menu-search-bar hidden md:flex relative">
+              <button class="nav-menu-search-bar-search-btn absolute h-full">
+                <svg class="w-3 h-3 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z">
+                  </path>
+                </svg>
+              </button>
+              <input name="s" type="text" class="w-full" />
+            </form>
+          </ul>
         </div>
       </div>
-    </nav>    
+    </nav>
+    <main>
     {{ block "main" . }}{{ end }}
+    
     <p>
       {{ if hugo.IsProduction }} PRODUCTION MODE {{ end }} {{ if not
       hugo.IsProduction }} DEVELOPMENT MODE{{ end }}
     </p>
+    </main>
+    <footer class="footer">
+      <div class="container flex">
+        <section class="footer-section-info basis-2/5">
+          <div class="address">
+            <a class="logo" href="/" title="JSBase Vietnam">
+              <img src="../assets/images/jsbasevietnam-white.png" alt="JSBase Vietnam" title="JSBase Vietnam" />
+            </a>
+            <h4 class="footer-heading">CÔNG TY TNHH JSBASEVIETNAM<h4>
+                <p>MST: 0111999888 - Sở KHĐT TP ABC cấp ngày DD/MM/YYYY</p>
+                <p>99 Street, KP99, District A, City B</p>
+                <p><a href="tel:093759489">093 759 0489</a><i class="px-1">-</i><a href="tel:1800123456">1800 123 546</a>
+                </p>
+                <p><a href="mailto:support@sonnm.com">support@sonnm.com</a></p>
+          </div>
+        </section>
+        <div class="footer-section-navigation-menu basis-1/5">
+          <h4 class="footer-heading">CÔNG TY</h4>
+          <ul class="footer-section-navigation-menu-links">
+            <li><a href="">Về Chúng tôi</a></li>
+            <li><a href="">Tuyển dụng</a></li>
+            <li><a href="">Đội ngũ</a></li>
+            <li><a href="">Liên hệ</a></li>
+            <li><a href="">Chính sách bảo mật</a></li>
+            <li><a href="">Điều khoản sử dụng</a></li>
+          </ul>
+        </div>
+        <div class="footer-section-navigation-menu basis-1/5">
+          <h4 class="footer-heading">DỊCH VỤ</h4>
+          <ul class="footer-section-navigation-menu-links">
+            <li><a href="">Thiết kế website</a></li>
+            <li><a href="">Outsourcing</a></li>
+            <li><a href="">Tối ưu hóa SEO</a></li>
+            <li><a href="">Xây dựng landing page</a></li>
+            <li><a href="">Tích hợp các công cụ phân tích</a></li>
+            <li><a href="">Báo cáo thời gian thực</a></li>
+            <li><a href="">Tích hợp API</a></li>
+          </ul>
+        </div>
+        <div class="footer-section-navigation-menu basis-1/5">
+          <h4 class="footer-heading">THÔNG TIN</h4>
+          <ul class="footer-section-navigation-menu-links">
+            <li><a href="">Tin tức thị trường</a></li>
+            <li><a href="">Báo cáo & Phân tích</a></li>
+            <li><a href="">Kiến thức về quảng cáo</a></li>
+            <li><a href="">Kiến thức bán hàng</a></li>
+            <li><a href="">Xây dựng quy trình</a></li>
+            <li><a href="">Quản lí đội nhóm</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="container">
+        <div class="text-center">
+          <a href=""><span class="material-icons text-4xl">facebook</span></a>
+          <a href=""><span class="material-icons text-4xl">smart_display</span></a>
+        </div>
+        <div class="text-center text-lg py-4">
+          Copyright @ nodepress 2022
+        </div>
+        <div class="text-center text-sm">
+          Powered by <a class="font-bold text-primary" href="https://github.com/jsguru-net/nodepress">NodePress</a> - Made
+          with love from <a class="font-bold text-primary" href="https://github.com/jsguru-net/nodepress">jsguru.net</a> -
+          Build
+          Version 202201302230
+        </div>
+      </div> -->
+    </footer>
 
-    {{ if hugo.IsProduction }}
-      {{ $mainJs := resources.Get "themes/2022/public/main.js" }}
-      <script type="text/javascript" src="{{$mainJs.Permalink}}"></script>
-      {{ $homeJs := resources.Get "themes/2022/public/home.js" }}
-      <script type="text/javascript" src="{{$homeJs.Permalink}}"></script>      
-    {{ end }}
-
-    {{ if not hugo.IsProduction }}
-    {{ $mainJs := resources.Get "themes/2022/dist/main.js" }}
-    <script type="text/javascript" src="{{$mainJs.Permalink}}"></script>
-    {{ $homeJs := resources.Get "themes/2022/dist/home.js" }}
-    <script type="text/javascript" src="{{$homeJs.Permalink}}"></script>      
+    <!-- Load scripts -->
+    {{ range $script := .Site.Data.assets.scripts }}
+      {{ if eq $script.type "core" }}
+        {{ $mainScriptPath := printf "%s" $script.name | printf "%s%s" "core/"  | printf "%s" }}
+        {{ $mainScript := resources.Get $mainScriptPath }}
+        {{ if ne $mainScript nil }}
+          <script type="text/javascript" src="{{ $mainScript.Permalink }}"></script>
+        {{ end }}
+      {{ else if eq $script.type "theme" }}
+        {{ $mainScriptPath := printf "%s" $script.name | printf "%s%s" $themePath  | printf "%s" }}
+        {{ $mainScript := resources.Get $mainScriptPath }}
+        {{ if ne $mainScript nil }}
+          <script type="text/javascript" src="{{ $mainScript.Permalink }}"></script>
+        {{ end }}
+      {{ end }}       
     {{ end }}    
   </body>
 </html>

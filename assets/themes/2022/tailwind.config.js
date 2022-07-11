@@ -1,5 +1,8 @@
 module.exports = {
-  purge: ["./*.php", "./**/*.php"],
+  purge: [
+    "../../../themes/2022/layouts/*.html",
+    "../../../themes/2022/layouts/**/*.html",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {

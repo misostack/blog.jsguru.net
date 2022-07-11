@@ -64,19 +64,19 @@ plugins.push(
     filename: "[name].css",
   })
 );
-plugins.push(
-  new CopyPlugin({
-    patterns: [
-      {
-        from: `src/assets`,
-        to: "assets",
-      },
-    ],
-    options: {
-      concurrency: 100,
-    },
-  })
-);
+// plugins.push(
+//   new CopyPlugin({
+//     patterns: [
+//       {
+//         from: `src/assets`,
+//         to: "assets",
+//       },
+//     ],
+//     options: {
+//       concurrency: 100,
+//     },
+//   })
+// );
 plugins.push(
   new BrowserSyncPlugin(
     {
