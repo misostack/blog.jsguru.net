@@ -18,7 +18,10 @@
   </head>
   <body>
     {{ block "main" . }}{{ end }}
-
+    <p>
+      {{ if hugo.IsProduction }} PRODUCTION MODE {{ end }} {{ if not
+      hugo.IsProduction }} DEVELOPMENT MODE{{ end }}
+    </p>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -2,21 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/post/001-create-static-blog-with-hugo-and-github-pages-in-5-minutes/</loc>
+    <loc>//blog.jsguru.net/post/001-create-static-blog-with-hugo-and-github-pages-in-5-minutes/</loc>
     <lastmod>2022-06-21T15:43:50+07:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>//blog.jsguru.net/post/test/</loc>
     <lastmod>2022-06-21T15:43:50+07:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/default/</loc>
+    <loc>//blog.jsguru.net/categories/</loc>
     <lastmod>2022-06-21T15:43:50+07:00</lastmod>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>//blog.jsguru.net/categories/default/</loc>
     <lastmod>2022-06-21T15:43:50+07:00</lastmod>
   </url><url>
-    <loc>http://example.org/post/</loc>
+    <loc>//blog.jsguru.net/</loc>
     <lastmod>2022-06-21T15:43:50+07:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>//blog.jsguru.net/post/</loc>
+    <lastmod>2022-06-21T15:43:50+07:00</lastmod>
+  </url><url>
+    <loc>//blog.jsguru.net/post/setup-nodejs-development-enviroment-in-5-minutes/</loc>
+    <lastmod>2022-06-21T15:43:50+07:00</lastmod>
   </url>
 </urlset>
