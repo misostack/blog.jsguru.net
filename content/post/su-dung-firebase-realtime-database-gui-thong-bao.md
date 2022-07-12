@@ -6,7 +6,7 @@ description: "Hướng dẫn setup và code sample sử dụng ReactJS"
 keywords: ["firebase", "notifications"]
 categories: ["cheatsheet"]
 tags: []
-image: "/common/no-image.png"
+image: "https://user-images.githubusercontent.com/31009750/178468844-4ee1f036-78cc-44fd-8185-5092b5863494.png"
 ---
 
 # Firebase Realtime Database

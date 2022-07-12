@@ -6,27 +6,96 @@
     <description>Recent content in Posts on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Jun 2022 15:43:50 +0700</lastBuildDate><atom:link href="//blog.jsguru.net/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Jul 2022 17:09:16 +0700</lastBuildDate><atom:link href="//blog.jsguru.net/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>001 Create Static Blog With Hugo and Github Pages in 5 Minutes</title>
-      <link>//blog.jsguru.net/post/001-create-static-blog-with-hugo-and-github-pages-in-5-minutes/</link>
+      <title>Sử dụng Firebase Realtime Database để gửi thông báo cho người dùng trong web app</title>
+      <link>//blog.jsguru.net/post/su-dung-firebase-realtime-database-gui-thong-bao/</link>
+      <pubDate>Tue, 12 Jul 2022 17:09:16 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/su-dung-firebase-realtime-database-gui-thong-bao/</guid>
+      <description>Firebase Realtime Database Create new project https://console.firebase.google.com/u/0/ Step 1
+Step 2
+Step 3
+Add new firebase realtime database Select your database region
+Test Mode Enable
+Finally, you will have this new database with the generated URI
+Let’s design a simple notification database { &amp;#34;notifications&amp;#34;: { &amp;#34;1&amp;#34;: [ { &amp;#34;userId&amp;#34;: 1, &amp;#34;notificationId&amp;#34;: 1, &amp;#34;content&amp;#34;: &amp;#34;hello&amp;#34;, &amp;#34;notificationType&amp;#34;: 1, &amp;#34;isRead&amp;#34;: false, &amp;#34;isSent&amp;#34;: false }, { &amp;#34;userId&amp;#34;: 1, &amp;#34;notificationId&amp;#34;: 2, &amp;#34;content&amp;#34;: &amp;#34;hey&amp;#34;, &amp;#34;notificationType&amp;#34;: 2, &amp;#34;isRead&amp;#34;: false, &amp;#34;isSent&amp;#34;: false } ], &amp;#34;2&amp;#34;: [ { &amp;#34;userId&amp;#34;: 2, &amp;#34;notificationId&amp;#34;: 3, &amp;#34;content&amp;#34;: &amp;#34;heyo&amp;#34;, &amp;#34;notificationType&amp;#34;: 1, &amp;#34;isRead&amp;#34;: false, &amp;#34;isSent&amp;#34;: false } ] } } Import</description>
+    </item>
+    
+    <item>
+      <title>Tim Hieu Ve Props Va State Trong Reactjs</title>
+      <link>//blog.jsguru.net/post/tim-hieu-ve-props-va-state-trong-reactjs/</link>
+      <pubDate>Tue, 12 Jul 2022 15:14:47 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/tim-hieu-ve-props-va-state-trong-reactjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Con đường trở thành lập trình viên fullstack JS</title>
+      <link>//blog.jsguru.net/post/con-duong-tro-lap-lap-trinh-vien-fullstack-js/</link>
+      <pubDate>Tue, 12 Jul 2022 14:24:28 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/con-duong-tro-lap-lap-trinh-vien-fullstack-js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Create New Spa With Reactjs</title>
+      <link>//blog.jsguru.net/post/create-new-spa-with-reactjs/</link>
+      <pubDate>Tue, 12 Jul 2022 14:23:31 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/create-new-spa-with-reactjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ngay Dau Di Lam Dev Backend</title>
+      <link>//blog.jsguru.net/post/ngay-dau-di-lam-dev-backend/</link>
+      <pubDate>Tue, 12 Jul 2022 11:41:01 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/ngay-dau-di-lam-dev-backend/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>System Design Head First</title>
+      <link>//blog.jsguru.net/post/system-design-head-first/</link>
+      <pubDate>Tue, 12 Jul 2022 11:39:43 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/system-design-head-first/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Developer Your Rest Api With Nestjs</title>
+      <link>//blog.jsguru.net/post/developer-your-rest-api-with-nestjs/</link>
+      <pubDate>Tue, 12 Jul 2022 11:39:11 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/developer-your-rest-api-with-nestjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Create New Website With Nextjs</title>
+      <link>//blog.jsguru.net/post/create-new-website-with-nextjs/</link>
+      <pubDate>Tue, 12 Jul 2022 11:38:00 +0700</pubDate>
+      
+      <guid>//blog.jsguru.net/post/create-new-website-with-nextjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Create Static Blog With Hugo and Github Pages in 5 Minutes</title>
+      <link>//blog.jsguru.net/post/create-static-blog-with-hugo-and-github-pages-in-5-minutes/</link>
       <pubDate>Tue, 21 Jun 2022 15:43:50 +0700</pubDate>
       
-      <guid>//blog.jsguru.net/post/001-create-static-blog-with-hugo-and-github-pages-in-5-minutes/</guid>
+      <guid>//blog.jsguru.net/post/create-static-blog-with-hugo-and-github-pages-in-5-minutes/</guid>
       <description>Todo [x] Download hugo releases for windows 10 https://gohugo.io/getting-started/installing/ Extract and copy hugo.exe to your HUGO_PATH Add your HUGO_PATH to environment path. Window Icon + &amp;rsquo;env&amp;rsquo; =&amp;gt; Edit System Variables Eg: C:/softwares/hugo
 Open system environment variable Add new hugo path Add hugo path to path Test
 hugo --help [x] Create new hugo site hugo new site blog.jsguru.net --force [x] Setup gh-pages for hugo https://github.com/marketplace/actions/hugo-setup
 .github\workflows\gh-pages.yml
 name: GitHub Pages on: push: branches: - main # Set a branch to deploy pull_request: jobs: deploy: runs-on: ubuntu-20.</description>
-    </item>
-    
-    <item>
-      <title>002 Create Static Blog With Hugo and Github Pages in 5 Minutes</title>
-      <link>//blog.jsguru.net/post/test/</link>
-      <pubDate>Tue, 21 Jun 2022 15:43:50 +0700</pubDate>
-      
-      <guid>//blog.jsguru.net/post/test/</guid>
-      <description>asdeqwaqwe</description>
     </item>
     
     <item>
