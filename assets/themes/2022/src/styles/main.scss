@@ -143,32 +143,59 @@ input {
 }
 
 .pagination {
-  @apply bg-white py-3 flex items-center justify-between;
-  &-mobile {
-    @apply flex-1 flex justify-between sm:hidden;
-  }
-  &-desktop {
-    @apply hidden sm:flex-1 sm:flex sm:items-center sm:justify-between;
-  }
-  &-prev {
-    @apply relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50;
-  }
-  &-next {
-    @apply ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50;
-  }
-  &-pager {
-    @apply relative z-0 inline-flex rounded-md shadow-sm -space-x-px;
-    .nav-links {
-      @apply inline-flex;
-      a {
-        @apply h-10 px-5 text-gray-600 transition-colors duration-150 bg-white hover:bg-lime-100 py-2;
-      }
-      .current {
-        @apply h-10 px-5 text-white transition-colors duration-150 bg-primary py-2;
-      }
-    }
-  }
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  text-align: center;
 }
+.pagination li {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination li.active a,
+.pagination a:hover {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+}
+
+// .pagination {
+//   @apply bg-white py-3 flex items-center justify-between;
+//   &-mobile {
+//     @apply flex-1 flex justify-between sm:hidden;
+//   }
+//   &-desktop {
+//     @apply hidden sm:flex-1 sm:flex sm:items-center sm:justify-between;
+//   }
+//   &-prev {
+//     @apply relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50;
+//   }
+//   &-next {
+//     @apply ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50;
+//   }
+//   &-pager {
+//     @apply relative z-0 inline-flex rounded-md shadow-sm -space-x-px;
+//     .nav-links {
+//       @apply inline-flex;
+//       a {
+//         @apply h-10 px-5 text-gray-600 transition-colors duration-150 bg-white hover:bg-lime-100 py-2;
+//       }
+//       .current {
+//         @apply h-10 px-5 text-white transition-colors duration-150 bg-primary py-2;
+//       }
+//     }
+//   }
+// }
 
 .footer {
   @apply bg-black py-8;

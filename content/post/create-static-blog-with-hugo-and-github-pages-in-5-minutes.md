@@ -5,6 +5,7 @@ date: 2022-06-21T15:43:50+07:00
 description: "Create Static Blog With Hugo and Github Pages in 5 Minutes"
 keywords: ["Create Static Blog With Hugo and Github Pages in 5 Minutes"]
 categories: ["cheatsheet"]
+tags: ["hugo"]
 image: "/common/no-image.png"
 ---
 

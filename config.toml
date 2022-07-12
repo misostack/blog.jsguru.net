@@ -7,6 +7,7 @@ ignoreFiles = ['\assets\node_modules\.*']
     name = "MISOSTACK"
     description = "NHATKIDUAN.MISOSTACK.COM là một blog để lưu lại các kiến thức, kinh nghiệm trong quá trình xây dựng một website hay ứng dụng"
     keywords = "nhat ki du an"
+    dateFormat = "2006-01-02 15:04:05"
     image = "/pages/home/nhat-ki-du-an.jpg"
     blog_pager = 10
     note_pager = 10
@@ -14,3 +15,4 @@ ignoreFiles = ['\assets\node_modules\.*']
     home_post_limit = 10
 [taxonomies]
     category = "categories"
+    tag = "tags"

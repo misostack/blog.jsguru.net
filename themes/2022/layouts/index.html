@@ -2,86 +2,88 @@
 
 <main>
     <section class="container section hero-section">
-      <h1 class="hero-section-heading">NodePress</h1>
+      <h1 class="hero-section-heading">Deep Work</h1>
       <div class="hero-section-content">
-        NodePress is open source software you can use to create a beautiful
-        website, blog, or app
+        <p>1 hour of deep work is better than 8 hours of shallow work</p>
+        <ul>
+          <li>Make time for deep work</li>
+          <li>Delegate, automate, eliminate everything else</li>
+        </ul>
       </div>
     </section>
     {{ $postImage := resources.GetMatch "themes/2022/src/assets/images/post-image.png" }}
-    <section class="container section news-section clearfix">
+    
+    <section class="container section news-section clearfix">      
       <div data-content="newsfeature">
         <div class="clear-fix">
+          {{ $cheatsheetCategory := .Site.Taxonomies.categories.cheatsheet }}
+          {{ range first 1 (sort $cheatsheetCategory.Pages "Date" "desc") }}
           <article class="card-post card-post-feature">
-            <a href="post.html">
-              <img src="{{$postImage.Permalink}}" alt="Flower and sky" />
+            <a href="{{ .Permalink }}">
+              <img src="{{.Params.Image | absURL}}" alt="{{.Title}}" />
             </a>
             <h2 class="card-post-title">
-              <a href="post.html">Điều gì khiến NestJS trở nên phổ biến?</a>
+              <a href="{{ .Permalink }}">{{.Title}}</a>
             </h2>
             <div class="card-post-description">
-              NestJS là một framework mã nguồn mở NodeJS, được xây dựng trên
-              nền tảng typescript. Hỗ trợ kiến trúc monolith cũng như
-              microservice.
+              {{.Description}}
             </div>
           </article>
-          {Array.from(Array(2).keys()).map((i) => (
+          {{ end }}
+          {{ $systemdesignCategory := .Site.Taxonomies.categories.systemdesign }}
+          {{ range first 5 (sort $systemdesignCategory.Pages "Date" "desc") }}
             <article class="card-post card-post-picked">
-              <a href="post.html">
-                <img src="{{$postImage.Permalink}}" alt="Flower and sky" />
+              <a href="{{ .Permalink }}">
+                <img src="{{.Params.Image | absURL}}" alt="{{.Title}}" />
               </a>
               <h3 class="card-post-title">
-                <a href="post.html">
-                  Làm thế nào để áp dụng MVC với NestJS?
-                </a>
+                <a href="{{ .Permalink }}">{{.Title}}</a>
               </h3>
             </article>
-          ))}
+          {{ end }}
         </div>
       </div>
+      
       <div data-content="newstrending">
-        {Array.from(Array(5).keys()).map((i) => (
+        {{ $lifestyleCategory := .Site.Taxonomies.categories.lifestyle }}
+        {{ range first 5 (sort $lifestyleCategory.Pages "Date" "desc") }}
           <article class="card-post card-post-feature">
-            <a href="post.html">
-              <img src="{{$postImage.Permalink}}" alt="Flower and sky" />
+            <a href="{{ .Permalink }}">
+              <img src="{{.Params.Image | absURL}}" alt="{{.Title}}" />
             </a>
-            <h4 class="card-post-title">
-              <a href="post.html">Làm thế nào để áp dụng MVC với NestJS?</a>
-            </h4>
+            <h3 class="card-post-title">
+              <a href="{{ .Permalink }}">{{.Title}}</a>
+            </h3>
           </article>
-        ))}
+        {{ end }}
       </div>
     </section>
     <section class="container section clearfix">
       <div class="content md:w-2/3 md:float-left">
-        {Array.from(Array(12).keys()).map((i) => (
-          <div class="card card-post md:flex mb-4">
-            <a href="post.html" class="card-image">
-              <img
-                class="w-96"
-                src="{{$postImage.Permalink}}"
-                alt="flower sky"
-              />
+        {{ $frameworkCategory := .Site.Taxonomies.categories.frameworks }}
+        {{ range first 12 (sort $frameworkCategory.Pages "Date" "desc") }}
+          <article class="card card-post md:flex mb-4">
+            <a href="{{ .Permalink }}">
+              <img  class="w-96" src="{{.Params.Image | absURL}}" alt="{{.Title}}" />
             </a>
             <div class="card-post-meta px-0 mt-2 md:px-4 md:mt-0">
               <h3 class="card-post-title">
-                <a href="post.html">NestJS là gì?</a>
+                <a href="{{ .Permalink }}">{{.Title}}</a>
               </h3>
               <div>
-                <a href="./category.html" class="card-post-category">
-                  Category
-                </a>
+                {{ range $category:= .Params.categories }}
+                  <a class="category-tag category-{{ $category }}" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
+                {{ end }}
               </div>
               <div>
-                <span class="card-post-date">19/01/2022</span>
+                <span class="card-post-date">{{ .PublishDate.Format .Site.Params.dateFormat }}</span>
               </div>
               <div class="card-post-description">
-                NestJS là 1 framework nodejs sử dụng typescript, hỗ trợ phát
-                triển ứng dụng web, api.
-              </div>
+                {{ .Description }}
+              </div>              
             </div>
-          </div>
-        ))}
+          </article>
+        {{ end }}        
       </div>
       <div class="sidebar md:w-1/3 md:float-left">
         <div class="theiaStickySidebar">
@@ -90,29 +92,23 @@
               HÃY KHÁM PHÁ THÊM CÁC CHỦ ĐỀ THÚ VỊ KHÁC BÊN DƯỚI
             </div>
             <div class="sidebar-widget-content p-4 flex flex-wrap flex-row">
-              {Array.from(Array(12).keys()).map((i) => (
-                <a
-                  href="./category.html"
-                  class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white"
-                >
-                  software architecture
-                </a>
-              ))}
+              {{ range $taxonomyname, $taxonomy := .Site.Taxonomies }}
+                {{ if eq $taxonomyname "tags" }}
+                    {{ range $key, $value := $taxonomy }}
+                        {{ $categoryUrl := $key | printf "%s%s" "tags/" | printf "%s" }}
+                        <a
+                        href="{{ $categoryUrl | absURL }}"
+                        class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white"
+                      >
+                      {{ $key }}
+                      </a>
+                    {{ end }}
+                {{ end }}
+              {{ end }}
             </div>
           </div>
         </div>
       </div>
     </section>
-  </main>
-
-<h1>Home Page</h1>
-
-{{ range first .Site.Params.home_post_limit ( sort (where .Site.Pages "Params.type" "post") "Date" "desc" ) }}            
-<li class="row-section-content-item">
-    <a class="row-section-content-item-link" href="{{ .Permalink }}">{{ .Title }} - {{ .PublishDate.Format "02 Jan, 2006" }}</a>
-    {{ range $category:= .Params.categories }}
-    <a class="category-tag category-{{ $category }}" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
-    {{ end }}
-</li>
-{{ end }} 
+  </main> 
 {{end }}

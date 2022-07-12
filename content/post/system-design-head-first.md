@@ -4,6 +4,6 @@ type: "post"
 date: 2022-07-12T11:39:43+07:00
 description: "System Design Head First"
 keywords: ["System Design Head First"]
-categories: ["system-design"]
+categories: ["systemdesign"]
 image: "/common/no-image.png"
 ---
