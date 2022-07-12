@@ -1,5 +1,6 @@
 {{ define "main" }}
-    <article class="article article-scrollby" data-target="#article-scrollpy">
+  <section class="container section">
+    <div class="page-content max-w-2xl mx-auto">
         <img src="{{ .Params.Image | absURL }}" class="img-responsive" alt="{{ .Title }}" />
         <h1>{{ .Title }}</h1>
         <p>
@@ -7,6 +8,31 @@
             <a class="category-tag category-{{ $category }}" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
             {{ end }}
         </p>
-        {{ .Content }}
-    </article>
+        {{ .Content }}        
+      
+      <div>
+        <a href="./category.html"
+          class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">software
+          architecture</a>
+      </div>
+    </div>
+  </section>
+  <section class="container section">
+    <div class="max-w-2xl mx-auto">
+      <div class="font-heading text-2xl font-semibold">You Might Also Like</div>
+      <div class="mt-8 grid  gap-8">
+        {{ range first 1 (where (where .Site.Pages ".Params.categories" "intersect" .Params.categories) "Permalink" "!=" .Permalink) }}
+        {{ $.Scratch.Set "has_related" true }}
+        {{ end }}
+        {{ if $.Scratch.Get "has_related" }}
+        <ul class="sidebar-links">
+        {{ $num_to_show := .Site.Params.related_content_limit | default 7 }}
+        {{ range first $num_to_show (where (where .Site.Pages ".Params.categories" "intersect" .Params.categories) "Permalink" "!=" .Permalink) }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+        </ul>
+        {{ end }}        
+      </div>
+    </div>
+  </section>
 {{ end }}

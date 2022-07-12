@@ -1,7 +1,7 @@
 <nav class="nav-fixed nav-default z-50">
     <div class="container">
       <div class="nav-container flex flex-wrap justify-between items-center">
-        <a href="#" class="nav-brand inline-block">
+        <a href="{{.Site.BaseURL}}" class="nav-brand inline-block">
           {{ $logo := resources.GetMatch "themes/2022/src/assets/images/2phut-logo.png" }}
           <img class="h-16" src="{{ $logo.Permalink }}" 
           alt="Stunning" />
@@ -59,15 +59,4 @@
         </ul>
       </div>
     </div>
-  </nav>
-
-<div class="mainnav">
-  <nav id="navBar" class="navbar navbar-default navbar-fixed clearfix">
-    <a href="/" class="navbar-branch"> Home </a>
-    <div class="navbar-menu-wrap">
-      <ul class="navbar-menu">
-
-      </ul>
-    </div>
-  </nav>
-</div>
+</nav>
