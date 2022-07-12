@@ -4,7 +4,7 @@ type: "post"
 date: 2022-06-21T15:43:50+07:00
 description: "Setup NodeJS Development Environment in 5 Minutes"
 keywords: ["Setup NodeJS Development Environment in 5 Minutes"]
-categories: ["default"]
+categories: ["cheatsheet"]
 image: "/common/no-image.png"
 ---
 

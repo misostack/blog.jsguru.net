@@ -2,14 +2,18 @@ baseURL = '//blog.jsguru.net'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = '2022'
+ignoreFiles = ['\assets\node_modules\.*']
 [params]
     name = "MISOSTACK"
     description = "NHATKIDUAN.MISOSTACK.COM là một blog để lưu lại các kiến thức, kinh nghiệm trong quá trình xây dựng một website hay ứng dụng"
     keywords = "nhat ki du an"
+    dateFormat = "2006-01-02 15:04:05"
     image = "/pages/home/nhat-ki-du-an.jpg"
     blog_pager = 10
     note_pager = 10
     article_pager = 10
     home_post_limit = 10
+    GACode = "G-1KK3645K2M"
 [taxonomies]
     category = "categories"
+    tag = "tags"
