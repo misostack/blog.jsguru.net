@@ -1,6 +1,6 @@
 baseURL = '//blog.jsguru.net'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = '1 hour of deep work is better than 8 hours of shallow work'
 theme = '2022'
 ignoreFiles = ['\assets\node_modules\.*']
 [params]
