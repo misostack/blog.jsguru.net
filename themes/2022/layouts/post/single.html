@@ -5,14 +5,14 @@
         <h1>{{ .Title }}</h1>
         <p>
             {{ range $category:= .Params.categories }}
-            <a class="category-tag category-{{ $category }}" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
+            <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
             {{ end }}
         </p>
         {{ .Content }}        
       
-      <div>
+      <div class="m-1 p-1">
         {{ range $category:= .Params.categories }}
-          <a class="category-tag category-{{ $category }}" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
+          <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href="{{ (print "categories/" $category) | absURL }}">{{ $category }}</a>
         {{ end }}
       </div>
     </div>
