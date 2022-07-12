@@ -4,6 +4,6 @@ type: "post"
 date: {{ .Date }}
 description: "{{ replace .TranslationBaseName "-" " " | title }}"
 keywords: ["{{ replace .TranslationBaseName "-" " " | title }}"]
-categories: ["default"]
+categories: ["cheatsheet"]
 image: "/common/no-image.png"
 ---

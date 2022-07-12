@@ -24,70 +24,7 @@
     <title>{{ .Site.Title }}</title>
   </head>
   <body class="body-nav-fixed">
-    <nav class="nav-fixed nav-default z-50">
-      <div class="container">
-        <div class="nav-container flex flex-wrap justify-between items-center">
-          <a href="#" class="nav-brand inline-block">
-            {{ $logo := resources.GetMatch "themes/2022/src/assets/images/2phut-logo.png" }}
-            <img class="h-16" src="{{ $logo.Permalink }}" 
-            alt="Stunning" />
-          </a>
-          <a href="javascript:void(0);" data-menu="#menu-main_menu" class="nav-menu-toggle"><span
-            class="material-icons">menu</span></a>
-
-          <ul id="menu-main_menu" class="nav-menu h-0 md:h-auto">
-            <form class="nav-menu-search-bar md:hidden relative">
-              <button class="nav-menu-search-bar-search-btn absolute h-full">
-                <svg class="w-3 h-3 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24">
-                  <path
-                    d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z">
-                  </path>
-                </svg>
-              </button>
-              <input name="s" type="text" class="w-full" />
-            </form>
-            <li class="nav-menu-item">
-              <a href="#" class="nav-menu-link">Giới thiệu <span class="material-icons">keyboard_arrow_down</span></a>
-              <ul class="sub-menu">
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Về Chúng tôi</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tuyển dụng</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Đội ngũ</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Liên hệ</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Chính sách bảo mật</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Điều khoản sử dụng</a></li>
-              </ul>
-            </li>
-            <li class="nav-menu-item">
-              <a href="" class="nav-menu-link">Dịch vụ <span class="material-icons">keyboard_arrow_down</span></a>
-              <ul class="sub-menu">
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Thiết kế website</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Outsourcing</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tối ưu hóa SEO</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Xây dựng landing page</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tích hợp các công cụ phân tích</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Báo cáo thời gian thực</a></li>
-                <li class="nav-menu-item"><a class="nav-menu-link" href="">Tích hợp API</a></li>
-              </ul>
-            </li>
-            <li class="nav-menu-item"><a href="" class="nav-menu-link">Tuyển dụng</a></li>
-            <li class="nav-menu-item"><a href="" class="nav-menu-link">Thông tin</a></li>
-            <li class="nav-menu-item"><a href="" class="nav-menu-link">Liên hệ</a></li>
-            <form class="nav-menu-search-bar hidden md:flex relative">
-              <button class="nav-menu-search-bar-search-btn absolute h-full">
-                <svg class="w-3 h-3 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24">
-                  <path
-                    d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z">
-                  </path>
-                </svg>
-              </button>
-              <input name="s" type="text" class="w-full" />
-            </form>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    {{ partial "mainnav" . }}
     <main>
     {{ block "main" . }}{{ end }}
     
