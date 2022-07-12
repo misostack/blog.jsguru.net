@@ -22,6 +22,16 @@
     {{ end }}    
 
     <title>{{ .Site.Title }}</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{.Site.Params.GACode}}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{.Site.Params.GACode}}');
+    </script>    
   </head>
   <body class="body-nav-fixed">
     {{ partial "mainnav" . }}

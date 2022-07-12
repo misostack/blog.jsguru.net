@@ -13,6 +13,7 @@ ignoreFiles = ['\assets\node_modules\.*']
     note_pager = 10
     article_pager = 10
     home_post_limit = 10
+    GACode = "G-1KK3645K2M"
 [taxonomies]
     category = "categories"
     tag = "tags"
