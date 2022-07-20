@@ -2,7 +2,7 @@
 title: "Javascript Numeric Precision Issue"
 type: "post"
 date: 2022-07-20T11:47:31+07:00
-description: "Javascript Numeric Precision Issue"
+description: "0.3 - 0.1 = 0.19999999999999998 (ảo chưa)"
 keywords: ["Javascript Numeric Precision Issue"]
 categories: ["cheatsheet"]
 tags: []
