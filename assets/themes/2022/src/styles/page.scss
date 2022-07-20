@@ -6,15 +6,24 @@
   h3,
   h4,
   h5,
-  h6,
-  {
-    @apply my-8;
+  h6 {
+    @apply my-4;
   }
-  p{
+  p {
     @apply my-2;
   }
 
   em {
     @apply text-gray-600 italic;
+  }
+  ul {
+    list-style: square;
+    padding: 0.25rem 0 0 2.25rem;
+  }
+  blockquote {
+    padding: 0 1em;
+    color: gray;
+    border-left: 0.25em solid gray;
+    margin: 1rem 0;
   }
 }
