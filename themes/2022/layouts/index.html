@@ -30,7 +30,7 @@
             </div>
           </article>
           {{ end }}
-          {{ $systemdesignCategory := .Site.Taxonomies.categories.systemdesign }}
+          {{ $systemdesignCategory := .Site.Taxonomies.categories.lifestyle }}
           {{ range first 5 (sort $systemdesignCategory.Pages "Date" "desc") }}
             <article class="card-post card-post-picked">
               <a href="{{ .Permalink }}">
@@ -45,7 +45,7 @@
       </div>
       
       <div data-content="newstrending">
-        {{ $lifestyleCategory := .Site.Taxonomies.categories.lifestyle }}
+        {{ $lifestyleCategory := .Site.Taxonomies.categories.frameworks }}
         {{ range first 5 (sort $lifestyleCategory.Pages "Date" "desc") }}
           <article class="card-post card-post-feature">
             <a href="{{ .Permalink }}">
@@ -60,7 +60,7 @@
     </section>
     <section class="container section clearfix">
       <div class="content md:w-2/3 md:float-left">
-        {{ $frameworkCategory := .Site.Taxonomies.categories.frameworks }}
+        {{ $frameworkCategory := .Site.Taxonomies.categories.lifestyle }}
         {{ range first 12 (sort $frameworkCategory.Pages "Date" "desc") }}
           <article class="card card-post md:flex mb-4">
             <a href="{{ .Permalink }}">
