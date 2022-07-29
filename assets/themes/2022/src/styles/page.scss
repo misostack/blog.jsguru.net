@@ -33,4 +33,7 @@
   pre {
     padding: 1rem;
   }
+  a {
+    @apply text-primary;
+  }
 }
