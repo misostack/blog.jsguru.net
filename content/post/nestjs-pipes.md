@@ -140,6 +140,274 @@ req
 - [Multer](https://www.npmjs.com/package/multer)
 - [Form Data](https://www.npmjs.com/package/form-data)
 
+**Let's take a look at example with Formidable and Multer**
+
+## 1. Multer is a middleware, so our approach here is creating a middleware and apply multer
+
+- [x] Check in header if content type is mutipart
+- [x] Example for middleware in NestJS
+- [x] Apply multer middleware with configuration
+
+```ts
+const multipart = /multipart/i.test(req.headers["content-type"]);
+```
+
+> Let's create an example for middleware in NestJS
+
+```ts
+import { NextFunction, Request, Response } from "express";
+
+const ExampleMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  console.log("[ExampleMiddleware]");
+  return next();
+};
+export default ExampleMiddleware;
+```
+
+**And we can use it like this**
+
+```ts
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ExampleMiddleware).forRoutes("*");
+  }
+}
+```
+
+**Example with Multer**
+
+```ts
+import { MulterOptions } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
+import * as multer from "multer";
+
+const MulterMiddleware = (
+  multerOptions: MulterOptions,
+  fieldName = "file",
+  single = true
+) => {
+  const upload = multer(multerOptions);
+  return single ? upload.single(fieldName) : upload.array(fieldName);
+};
+
+export default MulterMiddleware;
+export class Environment {
+  static getMulterOptions(options: Partial<MulterOptions> = {}): MulterOptions {
+    return {
+      dest: "./public/data/uploads",
+      ...options,
+    };
+  }
+}
+
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    const SINGLE_MULTIPART_ROUTES = [
+      "examples/request-object/express/upload-file/multer",
+    ];
+    const MULTIPLE_MULTIPART_ROUTES = [
+      "examples/request-object/express/upload-multiple-file/multer",
+    ];
+    consumer
+      .apply(ExampleMiddleware)
+      .forRoutes("*")
+      .apply(MulterMiddleware(Environment.getMulterOptions()))
+      .forRoutes(...SINGLE_MULTIPART_ROUTES)
+      .apply(
+        MulterMiddleware(
+          Environment.getMulterOptions({
+            limits: {
+              fileSize: 1024 * 1024 * 5, // in bytes : 5MB
+              files: 2, // maximum files
+            },
+          }),
+          "files",
+          false
+        )
+      )
+      .forRoutes(...MULTIPLE_MULTIPART_ROUTES);
+  }
+}
+```
+
+**Does multer support us to save file with custom file name? YES**
+
+```ts
+import { MulterOptions } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
+import * as multer from "multer";
+
+const getMyStorage = (destination = "./public/data/uploads") => {
+  return multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, destination);
+    },
+    filename: function (req, file, cb) {
+      // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      cb(null, `${file.originalname}`);
+    },
+  });
+};
+
+const getMyFileFilter = function (req, file, cb) {
+  const allowedMimes = [
+    "image/jpeg",
+    "image/pjpeg",
+    "image/png",
+    "application/pdf",
+  ];
+  if (!allowedMimes || allowedMimes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(
+      {
+        success: false,
+        code: "invalid_file_type",
+        message: "Invalid file type. Only jpg, png image files are allowed.",
+      },
+      false
+    );
+  }
+};
+
+const MulterMiddleware = (
+  multerOptions: MulterOptions,
+  fieldName = "file",
+  single = true
+) => {
+  const upload = multer({
+    storage: getMyStorage(multerOptions.dest),
+    fileFilter: getMyFileFilter,
+    ...multerOptions,
+  });
+  return single ? upload.single(fieldName) : upload.array(fieldName);
+};
+
+export default MulterMiddleware;
+```
+
+**It's pretty cool right, and you have to handle errors when multer validation was failed**
+
+Okie, but the error will be thrown in middleware how do we handle? LOL.
+
+**Don't worry**
+
+![image](https://user-images.githubusercontent.com/31009750/182817635-c358897c-ef74-4f42-aede-e415f81e51d6.png)
+
+NestJS provide us something call **Exception filters**, so you can catch and customize your error message before they were sending to client
+
+### Exception Filters
+
+```ts
+import {
+  ExceptionFilter,
+  Catch,
+  ArgumentsHost,
+  HttpException,
+  HttpStatus,
+} from "@nestjs/common";
+import { HttpArgumentsHost } from "@nestjs/common/interfaces";
+import { AbstractHttpAdapter, HttpAdapterHost } from "@nestjs/core";
+import { MulterError } from "multer";
+
+interface HttpErrorResponse {
+  code: string;
+  message: string;
+  errors?: Array<any>;
+}
+
+@Catch()
+export class AllExceptionsFilter implements ExceptionFilter {
+  constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
+  handleHttpException(
+    exception: HttpException,
+    httpAdapter: AbstractHttpAdapter,
+    ctx: HttpArgumentsHost,
+    isProduction
+  ) {
+    const statusCode = exception.getStatus();
+    const res = exception.getResponse() as HttpErrorResponse;
+    return httpAdapter.reply(
+      ctx.getResponse(),
+      {
+        message: res.message,
+        code: (res.code ||= res.message),
+        errors: (res.errors ||= null),
+      },
+      statusCode
+    );
+  }
+  handleMulterException(
+    exception: MulterError,
+    httpAdapter: AbstractHttpAdapter,
+    ctx: HttpArgumentsHost,
+    isProduction
+  ) {
+    return httpAdapter.reply(
+      ctx.getResponse(),
+      {
+        code: exception.code,
+        message: isProduction ? exception.message : exception.code,
+        statusCode: HttpStatus.BAD_REQUEST,
+      },
+      HttpStatus.BAD_REQUEST
+    );
+  }
+  catch(exception: unknown, host: ArgumentsHost) {
+    const { httpAdapter } = this.httpAdapterHost;
+    const ctx = host.switchToHttp();
+    const isProduction = process.env.NODE_ENV === "production";
+    if (exception instanceof HttpException) {
+      return this.handleHttpException(
+        exception,
+        httpAdapter,
+        ctx,
+        isProduction
+      );
+    }
+    if (exception instanceof MulterError) {
+      return this.handleMulterException(
+        exception,
+        httpAdapter,
+        ctx,
+        isProduction
+      );
+    }
+    // otherwise
+    return httpAdapter.reply(
+      ctx.getResponse(),
+      {
+        message: isProduction
+          ? "INTERNAL_SERVER_ERROR"
+          : (exception as Error).message + (exception as Error).stack,
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      },
+      HttpStatus.INTERNAL_SERVER_ERROR
+    );
+  }
+}
+
+@Module({
+  imports: [],
+  controllers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+  ],
+})
+export class AppModule implements NestModule {}
+```
+
+### But this approach has some limitation
+
+- You have more than 1 field for file upload. Eg: You have an entity that has: thumbnail, slide photos, icon
+- You wanna have custom message for file size limit and specify which file was reached the limit
+- You wanna throw and error if the request does not include files
+
+## 2. Use built-in Pipe
+
 **What is Pipe?**
 
 > A pipe is a class annotated with the @Injectable() decorator, which implements the PipeTransform interface
