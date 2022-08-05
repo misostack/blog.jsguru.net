@@ -9,12 +9,12 @@
 <link rel=stylesheet href=https://blog.jsguru.net/themes/2022/public/page.css>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KK3645K2M"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-1KK3645K2M')</script>
-<title>Create New Website With Nextjs | Create New Website With Nextjs | 1 hour of deep work is better than 8 hours of shallow work</title>
+<title>Vuejs How to Add TailwindCSS in Your Application | Tailwind CSS is the only framework that I've seen scale on large teams. It’s easy to customize, adapts to any design, and the build size is tiny | 1 hour of deep work is better than 8 hours of shallow work</title>
 <meta name=robots content="all">
-<meta name=keywords content="Create New Website With Nextjs">
-<meta name=description content="Create New Website With Nextjs">
+<meta name=keywords content="vuejs">
+<meta name=description content="Tailwind CSS is the only framework that I've seen scale on large teams. It’s easy to customize, adapts to any design, and the build size is tiny ">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://blog.jsguru.net/common/no-image.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/31009750/183083369-7c2d85de-bc3a-4c91-b88a-f85297d8e2c0.png">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="750">
 <meta property="og:image:height" content="300">
@@ -62,11 +62,81 @@
 <main>
 <section class="container section">
 <div class="page-content max-w-2xl mx-auto">
-<img src=https://blog.jsguru.net/common/no-image.png class=img-responsive alt="Create New Website With Nextjs">
-<h1>Create New Website With Nextjs</h1>
+<img src=https://user-images.githubusercontent.com/31009750/183083369-7c2d85de-bc3a-4c91-b88a-f85297d8e2c0.png class=img-responsive alt="Vuejs How to Add TailwindCSS in Your Application">
+<h1>Vuejs How to Add TailwindCSS in Your Application</h1>
 <p>
 <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=https://blog.jsguru.net/categories/frameworks>frameworks</a>
 </p>
+<ul>
+<li><input checked disabled type=checkbox> Install tailwindcss&rsquo;s dependency packages</li>
+<li><input checked disabled type=checkbox> Configure your template paths tailwind.config.js</li>
+<li><input checked disabled type=checkbox> Add Sass Support</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+</code></pre></div><p><strong>tailwind.config.cjs</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>/** @type {import(&#39;tailwindcss&#39;).Config} */</span>
+<span style=color:#a6e22e>module</span>.<span style=color:#a6e22e>exports</span> <span style=color:#f92672>=</span> {
+  <span style=color:#a6e22e>content</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#34;./index.html&#34;</span>, <span style=color:#e6db74>&#34;./src/**/*.{vue,js,ts,jsx,tsx}&#34;</span>],
+  <span style=color:#a6e22e>theme</span><span style=color:#f92672>:</span> {
+    <span style=color:#a6e22e>extend</span><span style=color:#f92672>:</span> {},
+  },
+  <span style=color:#a6e22e>plugins</span><span style=color:#f92672>:</span> [],
+};
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm add -D sass
+</code></pre></div><p><strong>src/assets/scss/global.scss</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scss data-lang=scss><span style=color:#75715e>/* Fonts */</span>
+<span style=color:#66d9ef>@import</span> <span style=color:#e6db74>url(&#34;https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;display=swap&#34;)</span>;
+<span style=color:#66d9ef>@import</span> <span style=color:#e6db74>url(&#34;https://fonts.googleapis.com/icon?family=Material+Icons&#34;)</span>;
+
+<span style=color:#75715e>/* Tailwind base */</span>
+<span style=color:#66d9ef>@tailwind</span> <span style=color:#f92672>base</span>;
+<span style=color:#66d9ef>@tailwind</span> <span style=color:#f92672>components</span>;
+<span style=color:#66d9ef>@tailwind</span> <span style=color:#f92672>utilities</span>;
+
+<span style=color:#f92672>h1</span><span style=color:#f92672>,</span>
+<span style=color:#f92672>h2</span><span style=color:#f92672>,</span>
+<span style=color:#f92672>h3</span><span style=color:#f92672>,</span>
+<span style=color:#f92672>h4</span><span style=color:#f92672>,</span>
+<span style=color:#f92672>h5</span><span style=color:#f92672>,</span>
+<span style=color:#f92672>h6</span> {
+  <span style=color:#66d9ef>@apply</span> <span style=color:#f92672>font-bold</span>;
+  <span style=color:#a6e22e>font-family</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;Merriweather&#34;</span><span style=color:#f92672>,</span> serif;
+}
+
+<span style=color:#f92672>h6</span> {
+  <span style=color:#66d9ef>@apply</span> <span style=color:#f92672>text-xs</span>;
+}
+<span style=color:#f92672>h5</span> {
+  <span style=color:#66d9ef>@apply</span> <span style=color:#f92672>text-xs</span>;
+}
+<span style=color:#f92672>h4</span> {
+  <span style=color:#66d9ef>@apply</span> <span style=color:#f92672>text-sm</span>;
+}
+<span style=color:#f92672>h3</span> {
+  <span style=color:#66d9ef>@apply</span> <span style=color:#f92672>text-base</span>;
+}
+<span style=color:#f92672>h2</span> {
+  <span style=color:#66d9ef>@apply</span> <span style=color:#f92672>text-2xl</span>;
+}
+<span style=color:#f92672>h1</span> {
+  <span style=color:#66d9ef>@apply</span> <span style=color:#f92672>text-3xl</span>;
+}
+
+<span style=color:#a6e22e>.clearfix</span><span style=color:#a6e22e>:after</span> {
+  <span style=color:#a6e22e>clear</span><span style=color:#f92672>:</span> both;
+  <span style=color:#a6e22e>content</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;.&#34;</span>;
+  <span style=color:#a6e22e>display</span><span style=color:#f92672>:</span> block;
+  <span style=color:#a6e22e>width</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>0</span><span style=color:#66d9ef>px</span>;
+  <span style=color:#a6e22e>height</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>0</span><span style=color:#66d9ef>px</span>;
+}
+</code></pre></div><p><strong>Using it</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ts data-lang=ts><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>createApp</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;vue&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#34;./assets/scss/global.scss&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;./App.vue&#34;</span>;
+
+<span style=color:#a6e22e>createApp</span>(<span style=color:#a6e22e>App</span>).<span style=color:#a6e22e>mount</span>(<span style=color:#e6db74>&#34;#app&#34;</span>);
+</code></pre></div>
 <div class="m-1 p-1">
 <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=https://blog.jsguru.net/categories/frameworks>frameworks</a>
 </div>
@@ -77,13 +147,13 @@
 <div class="font-heading text-2xl font-semibold">You Might Also Like</div>
 <div class="mt-8 grid gap-8">
 <ul class=sidebar-links>
-<li><a href=/post/vuejs-how-to-add-tailwind-in-your-application/>Vuejs How to Add TailwindCSS in Your Application</a></li>
 <li><a href=/post/nestjs-request-and-response-object/>Nestjs Request and Response Object</a></li>
 <li><a href=/post/nestjs-upload-files/>Nestjs Upload Files</a></li>
 <li><a href=/post/nestjs-pipes/>Nestjs Pipes</a></li>
 <li><a href=/post/validate-request-input-in-nestjs/>Validate Request Input in Nestjs</a></li>
 <li><a href=/post/nestjs-provider/>Nestjs Provider</a></li>
 <li><a href=/post/developer-your-rest-api-with-nestjs/>Developer Your Rest Api With Nestjs</a></li>
+<li><a href=/post/create-new-website-with-nextjs/>Create New Website With Nextjs</a></li>
 </ul>
 </div>
 </div>
