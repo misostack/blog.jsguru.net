@@ -9,405 +9,6 @@ tags: ["nestjs"]
 image: "https://user-images.githubusercontent.com/31009750/181449337-70081a76-5a01-4229-805e-39ed0ded6b5b.png"
 ---
 
-As you've known, in a request we will have:
-
-- Route Params ( included in URL )
-- Query Params ( included in URL )
-- Body ( json/form-data/multipart/form-data )
-
-> There are 2 ways to get these values
-
-### Library specific Approach - Express
-
-```ts
-import { Controller, Req, Res } from "@nestjs/common";
-import { Request, Response } from "express";
-
-@Controller("examples")
-export class ExamplesController {
-  @Post("request-object/express/:email")
-  exampleRequestObjectExpress(@Req() req: Request, @Res() res: Response) {
-    const responseData = {
-      approach: "express",
-      routeParams: req.params,
-      queryParams: req.query,
-      body: req.body,
-      headers: req.headers,
-      ip: req.ip,
-      ips: req.ips,
-      hostname: req.hostname,
-      subdomain: req.subdomains,
-    };
-    res.status(200).json(responseData);
-  }
-}
-```
-
-### Standard using NestJS Decoratos
-
-```ts
-import {
-  Controller,
-  Delete,
-  Get,
-  Headers,
-  Ip,
-  Param,
-  Patch,
-  Post,
-  Query,
-  Req,
-  Res,
-} from "@nestjs/common";
-import { Body } from "@nestjs/common";
-import { Request, Response } from "express";
-
-@Controller("examples")
-export class ExamplesController {
-  @Post("request-object/standard/:email")
-  exampleRequestObjectStandard(
-    @Body() body,
-    @Query() query,
-    @Param("email") email: string,
-    @Headers() headers,
-    @Ip() ip
-  ) {
-    const responseData = {
-      approach: "standard",
-      routeParams: { email },
-      queryParams: query,
-      body: body,
-      headers: headers,
-      ip,
-    };
-    return responseData;
-  }
-}
-```
-
-**It's more clean right? We only have to work with JSON object, NestJS will do serialization part for us**
-
-### But how about uploading files with form-data/multipart?
-
-![image](https://user-images.githubusercontent.com/31009750/182763620-ac27e35a-5a4b-4d3f-9153-0fc98c22c199.png)
-
-**Let's have a look in POST data when a request is trying to upload a file**
-
-![image](https://user-images.githubusercontent.com/31009750/182764168-96dd74f6-0297-47e5-9bb9-56f1c39321f3.png)
-
-> Request is a streaming object
-
-![image](https://user-images.githubusercontent.com/31009750/182773536-4edb3c95-520d-4afc-bf8f-d16adede3224.png)
-
-> So let's do some transformation
-
-```ts
-import { Transform } from "stream";
-import { createWriteStream } from "fs";
-
-const writeStream = createWriteStream("./tmp/example-write-stream.pdf");
-// This will write the stream data into the open file
-req.pipe(writeStream);
-
-const myMultipartParser = new Transform({
-  transform(buffer, _, done) {
-    console.log(buffer);
-    console.log("-".repeat(50));
-    done();
-  },
-});
-req.pipe(myMultipartParser);
-req
-  .on("abort", () => res.send({ aborted: 1001 }))
-  .on("err", (err) => res.send(err))
-  .on("data", (buffer) => {
-    console.log("buffer", buffer);
-  })
-  .on("end", () => {
-    console.log("end");
-    res.status(200).json({
-      body: req.body,
-      headers: req.headers,
-    });
-  });
-```
-
-**If we have only one file it is okie to write this stream directly. But if we allow to upload multiple files. It will write into a same file if we don't know how to seperate files based on the stream data. We don't have to invent the wheel**
-
-> In NodeJS Ecosystem, we have 2 big libraries to handle this
-
-- [Formidable](https://www.npmjs.com/package/formidable)
-- [Multer](https://www.npmjs.com/package/multer)
-- [Form Data](https://www.npmjs.com/package/form-data)
-
-**Let's take a look at example with Formidable and Multer**
-
-## 1. Multer is a middleware, so our approach here is creating a middleware and apply multer
-
-- [x] Check in header if content type is mutipart
-- [x] Example for middleware in NestJS
-- [x] Apply multer middleware with configuration
-
-```ts
-const multipart = /multipart/i.test(req.headers["content-type"]);
-```
-
-> Let's create an example for middleware in NestJS
-
-```ts
-import { NextFunction, Request, Response } from "express";
-
-const ExampleMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  console.log("[ExampleMiddleware]");
-  return next();
-};
-export default ExampleMiddleware;
-```
-
-**And we can use it like this**
-
-```ts
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
-
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ExampleMiddleware).forRoutes("*");
-  }
-}
-```
-
-**Example with Multer**
-
-```ts
-import { MulterOptions } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
-import * as multer from "multer";
-
-const MulterMiddleware = (
-  multerOptions: MulterOptions,
-  fieldName = "file",
-  single = true
-) => {
-  const upload = multer(multerOptions);
-  return single ? upload.single(fieldName) : upload.array(fieldName);
-};
-
-export default MulterMiddleware;
-export class Environment {
-  static getMulterOptions(options: Partial<MulterOptions> = {}): MulterOptions {
-    return {
-      dest: "./public/data/uploads",
-      ...options,
-    };
-  }
-}
-
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    const SINGLE_MULTIPART_ROUTES = [
-      "examples/request-object/express/upload-file/multer",
-    ];
-    const MULTIPLE_MULTIPART_ROUTES = [
-      "examples/request-object/express/upload-multiple-file/multer",
-    ];
-    consumer
-      .apply(ExampleMiddleware)
-      .forRoutes("*")
-      .apply(MulterMiddleware(Environment.getMulterOptions()))
-      .forRoutes(...SINGLE_MULTIPART_ROUTES)
-      .apply(
-        MulterMiddleware(
-          Environment.getMulterOptions({
-            limits: {
-              fileSize: 1024 * 1024 * 5, // in bytes : 5MB
-              files: 2, // maximum files
-            },
-          }),
-          "files",
-          false
-        )
-      )
-      .forRoutes(...MULTIPLE_MULTIPART_ROUTES);
-  }
-}
-```
-
-**Does multer support us to save file with custom file name? YES**
-
-```ts
-import { MulterOptions } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
-import * as multer from "multer";
-
-const getMyStorage = (destination = "./public/data/uploads") => {
-  return multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, destination);
-    },
-    filename: function (req, file, cb) {
-      // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      cb(null, `${file.originalname}`);
-    },
-  });
-};
-
-const getMyFileFilter = function (req, file, cb) {
-  const allowedMimes = [
-    "image/jpeg",
-    "image/pjpeg",
-    "image/png",
-    "application/pdf",
-  ];
-  if (!allowedMimes || allowedMimes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(
-      {
-        success: false,
-        code: "invalid_file_type",
-        message: "Invalid file type. Only jpg, png image files are allowed.",
-      },
-      false
-    );
-  }
-};
-
-const MulterMiddleware = (
-  multerOptions: MulterOptions,
-  fieldName = "file",
-  single = true
-) => {
-  const upload = multer({
-    storage: getMyStorage(multerOptions.dest),
-    fileFilter: getMyFileFilter,
-    ...multerOptions,
-  });
-  return single ? upload.single(fieldName) : upload.array(fieldName);
-};
-
-export default MulterMiddleware;
-```
-
-**It's pretty cool right, and you have to handle errors when multer validation was failed**
-
-Okie, but the error will be thrown in middleware how do we handle? LOL.
-
-**Don't worry**
-
-![image](https://user-images.githubusercontent.com/31009750/182817635-c358897c-ef74-4f42-aede-e415f81e51d6.png)
-
-NestJS provide us something call **Exception filters**, so you can catch and customize your error message before they were sending to client
-
-### Exception Filters
-
-```ts
-import {
-  ExceptionFilter,
-  Catch,
-  ArgumentsHost,
-  HttpException,
-  HttpStatus,
-} from "@nestjs/common";
-import { HttpArgumentsHost } from "@nestjs/common/interfaces";
-import { AbstractHttpAdapter, HttpAdapterHost } from "@nestjs/core";
-import { MulterError } from "multer";
-
-interface HttpErrorResponse {
-  code: string;
-  message: string;
-  errors?: Array<any>;
-}
-
-@Catch()
-export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
-  handleHttpException(
-    exception: HttpException,
-    httpAdapter: AbstractHttpAdapter,
-    ctx: HttpArgumentsHost,
-    isProduction
-  ) {
-    const statusCode = exception.getStatus();
-    const res = exception.getResponse() as HttpErrorResponse;
-    return httpAdapter.reply(
-      ctx.getResponse(),
-      {
-        message: res.message,
-        code: (res.code ||= res.message),
-        errors: (res.errors ||= null),
-      },
-      statusCode
-    );
-  }
-  handleMulterException(
-    exception: MulterError,
-    httpAdapter: AbstractHttpAdapter,
-    ctx: HttpArgumentsHost,
-    isProduction
-  ) {
-    return httpAdapter.reply(
-      ctx.getResponse(),
-      {
-        code: exception.code,
-        message: isProduction ? exception.message : exception.code,
-        statusCode: HttpStatus.BAD_REQUEST,
-      },
-      HttpStatus.BAD_REQUEST
-    );
-  }
-  catch(exception: unknown, host: ArgumentsHost) {
-    const { httpAdapter } = this.httpAdapterHost;
-    const ctx = host.switchToHttp();
-    const isProduction = process.env.NODE_ENV === "production";
-    if (exception instanceof HttpException) {
-      return this.handleHttpException(
-        exception,
-        httpAdapter,
-        ctx,
-        isProduction
-      );
-    }
-    if (exception instanceof MulterError) {
-      return this.handleMulterException(
-        exception,
-        httpAdapter,
-        ctx,
-        isProduction
-      );
-    }
-    // otherwise
-    return httpAdapter.reply(
-      ctx.getResponse(),
-      {
-        message: isProduction
-          ? "INTERNAL_SERVER_ERROR"
-          : (exception as Error).message + (exception as Error).stack,
-        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-      },
-      HttpStatus.INTERNAL_SERVER_ERROR
-    );
-  }
-}
-
-@Module({
-  imports: [],
-  controllers: [],
-  providers: [
-    {
-      provide: APP_FILTER,
-      useClass: AllExceptionsFilter,
-    },
-  ],
-})
-export class AppModule implements NestModule {}
-```
-
-### But this approach has some limitation
-
-- You have more than 1 field for file upload. Eg: You have an entity that has: thumbnail, slide photos, icon
-- You wanna have custom message for file size limit and specify which file was reached the limit
-- You wanna throw and error if the request does not include files
-
-## 2. Use built-in Pipe
-
 **What is Pipe?**
 
 > A pipe is a class annotated with the @Injectable() decorator, which implements the PipeTransform interface
@@ -427,6 +28,411 @@ In NestJS we have some built-in pipes for transformation
 
 1. ValidationPipe
 
-```ts
+> Let's dive into this example
 
+```json
+{
+    "title": {
+        "dataType": string,
+        "required": true,
+        "maxLength": 75,
+        "minLength": 1,
+    },
+    "description": {
+        "dataType": string,
+        "required": false,
+        "maxLength": 160,
+    },
+    "content": {
+        "dataType": string,
+        "required": false
+    },
+    "status": {
+        "dataType": enum,
+        "required": false,
+        "default": 1,
+        "enum": {pending:1, published:2, archived:3}, // can not be archived when creating
+    },
+    "tags": {
+        "dataType": Array[string],
+        "required": false,
+        "arrayMaxLength": 5,
+        "eachValidation": {
+            "minLength": 3,
+            "maxLength": 10,
+        }
+    }
+}
 ```
+
+> Steps
+
+- [x] Install the required packages: [class-validator and class transformer](/post/nestjs-validate-request-input-in-nestjs)
+- [x] Create DTO class and defined constraints
+- [x] Use Pipe
+
+**You need to install the required packages before going further**
+
+```bash
+npm i --save class-validator class-transformer
+```
+
+> **DTO** : A **D**ata **T**ransfer **O**bject is an object that is used to encapsulate data, and send it from one subsystem of an application to another
+
+```ts
+import { IsNotEmpty, IsOptional, MaxLength } from "class-validator";
+
+export enum ExampleStatus {
+  pending = 1,
+  published = 2,
+  archived = 3,
+}
+
+export class ExampleDTO {
+  @MaxLength(75)
+  @IsNotEmpty()
+  title: string;
+
+  @IsOptional()
+  description = "";
+  @IsOptional()
+  content = "";
+  @IsOptional()
+  status: ExampleStatus = ExampleStatus.pending;
+  @IsOptional()
+  tags: Array<string> = [];
+
+  note = "";
+}
+```
+
+**Using it**
+
+```ts
+import {
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+
+@Post('built-in-pipes/example-validation-pipe')
+@UsePipes(
+  new ValidationPipe({
+    skipMissingProperties: false,
+    stopAtFirstError: true,
+  }),
+)
+exampleValidationPipe(@Body() exampleDTO: ExampleDTO) {
+  return { exampleDTO };
+}
+```
+
+**If all validation were passed**
+
+![image](https://user-images.githubusercontent.com/31009750/182997559-45641111-42a9-42b0-baff-a55e0901bd80.png)
+
+> Let's adjust ExampleDTO to match the defined schema above
+
+```ts
+import {
+  ArrayMaxSize,
+  IsArray,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from "class-validator";
+
+export enum ExampleStatus {
+  pending = 1,
+  published = 2,
+  archived = 3,
+}
+
+export class ExampleDTO {
+  @MaxLength(75)
+  @IsNotEmpty()
+  title: string;
+
+  @MaxLength(160)
+  @IsOptional()
+  description = "";
+
+  @IsOptional()
+  content = "";
+
+  @IsEnum(ExampleStatus)
+  @IsOptional()
+  status: ExampleStatus = ExampleStatus.pending;
+
+  @MinLength(3, { each: true })
+  @MaxLength(10, { each: true })
+  @ArrayMaxSize(5)
+  @IsArray()
+  @IsOptional()
+  tags: Array<string> = [];
+
+  note = "";
+}
+```
+
+**If we got errors**
+
+![image](https://user-images.githubusercontent.com/31009750/182998825-4805544d-044b-4a4b-9670-2f6ad66610a3.png)
+
+> The Exception that it will raise have this structure
+
+![image](https://user-images.githubusercontent.com/31009750/182999177-9836a933-2b78-4ec7-b8cd-265f5dec4c94.png)
+
+**When making a RESTful API application, the 1st rule you wanna have is "Uniform Interface"**
+
+In this case, we want to have a uniform for error response which supports the application can highlight the field that got an error with : errorCode and errorMessage. So in this case we must adjust the error response from validation pipe. Can we do in the **exception filter layer**? Possible but it is too dirty and we will get some side effects and unexpected error if we dont' handle enough case.
+
+**Our solution is very simple**: Create your **Custom Validation Pipe**
+
+```ts
+import {
+  PipeTransform,
+  Injectable,
+  ArgumentMetadata,
+  BadRequestException,
+} from "@nestjs/common";
+import { plainToClass } from "class-transformer";
+import { validate, ValidatorOptions } from "class-validator";
+
+@Injectable()
+export class CustomValidationPipe implements PipeTransform<any> {
+  _validatiorOptions: ValidatorOptions;
+  constructor(validatorOptions: Partial<ValidatorOptions>) {
+    this._validatiorOptions = {
+      ...validatorOptions,
+    };
+  }
+  async transform(value: any, args: ArgumentMetadata) {
+    const { metatype } = args;
+    console.error({ value });
+    console.error({ metatype });
+    if (!metatype || !this.toValidate(metatype)) {
+      return value;
+    }
+    const object = plainToClass(metatype, value);
+    // Pass `skipMissingProperties` as part of the custom validation
+    const errors = await validate(object, this._validatiorOptions);
+    if (errors.length > 0) {
+      throw new BadRequestException({
+        message: "Bad Request",
+        errors,
+        code: "HttpStatus.BAD_REQUEST",
+      });
+    }
+    return value;
+  }
+
+  private toValidate(metatype: any): boolean {
+    const types: any[] = [String, Boolean, Number, Array, Object];
+    return !types.includes(metatype);
+  }
+}
+
+// Usage
+
+@Post('built-in-pipes/example-validation-pipe')
+@UsePipes(
+  new CustomValidationPipe({
+    skipMissingProperties: false,
+    stopAtFirstError: true,
+  }),
+)
+exampleValidationPipe(@Body() exampleDTO: ExampleDTO) {
+  return { exampleDTO };
+}
+```
+
+**What we have now**
+
+```json
+{
+  "message": "Bad Request",
+  "code": "HttpStatus.BAD_REQUEST",
+  "errors": [
+    {
+      "target": {
+        "description": "",
+        "content": "",
+        "status": 1,
+        "tags": ["a"],
+        "note": "",
+        "title": ""
+      },
+      "value": "",
+      "property": "title",
+      "children": [],
+      "constraints": {
+        "isNotEmpty": "title should not be empty"
+      }
+    },
+    {
+      "target": {
+        "description": "",
+        "content": "",
+        "status": 1,
+        "tags": ["a"],
+        "note": "",
+        "title": ""
+      },
+      "value": ["a"],
+      "property": "tags",
+      "children": [],
+      "constraints": {
+        "minLength": "each value in tags must be longer than or equal to 3 characters"
+      }
+    }
+  ]
+}
+```
+
+It's better right, but it is still too much information. We can transform this object into a smaller and better format like this.
+
+```json
+{
+  "message": "Bad Request",
+  "code": "HttpStatus.BAD_REQUEST",
+  "errors": [
+    {
+      "property": "title",
+      "constraints": {
+        "isNotEmpty": "title should not be empty"
+      }
+    }
+  ]
+}
+```
+
+```ts
+import {
+  PipeTransform,
+  Injectable,
+  ArgumentMetadata,
+  BadRequestException,
+} from "@nestjs/common";
+import { plainToClass } from "class-transformer";
+import { validate, ValidationError, ValidatorOptions } from "class-validator";
+
+@Injectable()
+export class CustomValidationPipe implements PipeTransform<any> {
+  _validatiorOptions: ValidatorOptions;
+  constructor(validatorOptions: Partial<ValidatorOptions>) {
+    this._validatiorOptions = {
+      ...validatorOptions,
+    };
+  }
+  async transform(value: any, args: ArgumentMetadata) {
+    const { metatype } = args;
+    if (!metatype || !this.toValidate(metatype)) {
+      return value;
+    }
+    const object = plainToClass(metatype, value);
+    // Pass `skipMissingProperties` as part of the custom validation
+    const errors = await validate(object, this._validatiorOptions);
+    if (errors.length > 0) {
+      throw new BadRequestException({
+        message: "Bad Request",
+        errors: errors.map((error) => this.transformError(error)),
+        code: "HttpStatus.BAD_REQUEST",
+      });
+    }
+    return value;
+  }
+
+  private transformError(error: ValidationError) {
+    const { property, constraints } = error;
+    return {
+      property,
+      constraints,
+    };
+  }
+
+  private toValidate(metatype: any): boolean {
+    const types: any[] = [String, Boolean, Number, Array, Object];
+    return !types.includes(metatype);
+  }
+}
+```
+
+And
+
+```json
+{
+  "message": "Bad Request",
+  "code": "HttpStatus.BAD_REQUEST",
+  "errors": [
+    {
+      "property": "title",
+      "constraints": {
+        "isNotEmpty": "title should not be empty"
+      }
+    },
+    {
+      "property": "tags",
+      "constraints": {
+        "maxLength": "each value in tags must be shorter than or equal to 10 characters"
+      }
+    }
+  ]
+}
+```
+
+## Advanced
+
+1. But we have to add these lines for all action
+
+```ts
+  @UsePipes(
+    new CustomValidationPipe({
+      skipMissingProperties: false,
+      stopAtFirstError: true,
+    }),
+  )
+```
+
+> Don't worry, nestjs support us to add a pipe globally. Basically, we've only have to do like this
+
+```ts
+// DATA VALIDATIONS
+app.useGlobalPipes(
+  new CustomValidationPipe({
+    skipMissingProperties: false,
+    stopAtFirstError: false,
+  })
+);
+```
+
+> But, personally, I don't recommend this option. Because "global pipes registered from outside of any module "
+
+**We can set up a global pipe directly from any module using the following construction:**
+
+```ts
+@Module({
+  imports: [ExampleModule],
+  controllers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+    {
+      provide: APP_PIPE,
+      useFactory: () => {
+        return new CustomValidationPipe({
+          skipMissingProperties: false,
+          stopAtFirstError: false,
+        });
+      },
+    },
+  ],
+})
+export class AppModule implements NestModule {}
+```
+
+> It's more clean right, and you can use the power of Dependency Injection if your validation pipe depends on the other providers

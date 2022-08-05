@@ -250,29 +250,6 @@ describe("test class validator and class transformer utils", () => {
 
 ## Let's dive in more details with NestJS standard approach
 
-As you've known, in a request we will have:
+> NestJS provide us a built-in pipe which includes class-validator and class transformer.
 
-- Route Params ( included in URL )
-- Query Params ( included in URL )
-- Body ( json/form-data/multipart/form-data )
-
-> There are 2 ways to get these values
-
-### Standard using NestJS Pipes
-
-**What is Pipe?**
-
-> A pipe is a class annotated with the @Injectable() decorator, which implements the PipeTransform interface
-
-> Pipes operate on the arguments being processed by a controller route handler.
-
-> Nest interposes a pipe just before a method is invoked, and the pipe receives the arguments destined for the method and operates on them
-
-So that, we can use pipes in two typical use cases:
-
-1. Transformation : transform input data to the desired form
-2. Validation : evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception when the data is incorrect
-
-> Let's get back to our example
-
-In NestJS we have some built-in pipes for transformation
+[Using NestJS Pipes to Validate your Data](/post/nestjs-pipes/)
