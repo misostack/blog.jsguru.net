@@ -9,10 +9,10 @@
 <link rel=stylesheet href=https://blog.jsguru.net/themes/2022/public/page.css>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KK3645K2M"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-1KK3645K2M')</script>
-<title>System Design Head First | System Design Head First | 1 hour of deep work is better than 8 hours of shallow work</title>
+<title>How to Use Typescript Path Alias in Loopback 4 | In TypeScript you can avoid these 'bad' looking imports with the help of path aliases. With path aliases you can declare aliases that map to a certain absolute path in your application. | 1 hour of deep work is better than 8 hours of shallow work</title>
 <meta name=robots content="all">
-<meta name=keywords content="System Design Head First">
-<meta name=description content="System Design Head First">
+<meta name=keywords content="typescript,path alias">
+<meta name=description content="In TypeScript you can avoid these 'bad' looking imports with the help of path aliases. With path aliases you can declare aliases that map to a certain absolute path in your application.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://blog.jsguru.net/common/no-image.png">
 <meta property="og:image:type" content="image/jpeg">
@@ -62,13 +62,52 @@
 <main>
 <section class="container section">
 <div class="page-content max-w-2xl mx-auto">
-<img src=https://blog.jsguru.net/common/no-image.png class=img-responsive alt="System Design Head First">
-<h1>System Design Head First</h1>
+<img src=https://blog.jsguru.net/common/no-image.png class=img-responsive alt="How to Use Typescript Path Alias in Loopback 4">
+<h1>How to Use Typescript Path Alias in Loopback 4</h1>
 <p>
-<a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=https://blog.jsguru.net/categories/systemdesign>systemdesign</a>
+<a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=https://blog.jsguru.net/categories/cheatsheet>cheatsheet</a>
 </p>
+<h2 id=the-problem>The problem</h2>
+<p>In Node.js (or TS/JS in general) you can import single modules into your code.
+This might look the following:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ts data-lang=ts><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Example</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../example/model&#34;</span>;
+<span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Article</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../article/model&#34;</span>;
+</code></pre></div><p>The problem we have here is that the deeper your project tree is the more &lsquo;../&rsquo; are required to access modules in higher layers. Actually, this doesn&rsquo;t look very beautiful to be honest. Fortunately we can change that.</p>
+<p>The solution: <strong>path aliases</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ts data-lang=ts><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Example</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@modules/example/model&#34;</span>;
+<span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Article</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@modules/article/model&#34;</span>;
+</code></pre></div><p><strong>In our case</strong></p>
+<blockquote>
+<p>@modules that maps to &lsquo;./src/modules&rsquo;</p>
+</blockquote>
+<p>Our tsconfig</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#e6db74>&#34;baseUrl&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> <span style=color:#e6db74>&#34;./src&#34;</span><span style=color:#960050;background-color:#1e0010>,</span>
+<span style=color:#e6db74>&#34;paths&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> {
+    <span style=color:#f92672>&#34;@modules/*&#34;</span>: [<span style=color:#e6db74>&#34;./*&#34;</span>]
+}
+</code></pre></div><p>And run</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>ts-node -r tsconfig-paths/register src/index.ts
+</code></pre></div><p>But everything is not pink and you will get this error at run time</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>node dist/index.js
+</code></pre></div><blockquote>
+<p>Error: Cannot find module &lsquo;@modules/example/model&rsquo;</p>
+</blockquote>
+<blockquote>
+<p>Why?</p>
+</blockquote>
+<p>Because when you build, it is still keep your alias, so there are 2 ways to allow us to start the application:</p>
+<ol>
+<li>Using tsconfig-paths at run time, at start up time, it will map the path alias to your relative paths</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>node -r tsconfig-paths/register dist/index.js
+</code></pre></div><ol start=2>
+<li>Replace all relative path in your build with <a href=https://github.com/justkey007/tsc-alias>tsc-alias</a></li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm install --save-dev tsc-alias
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#e6db74>&#34;build&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> <span style=color:#e6db74>&#34;lb-tsc --copy-resources &amp;&amp; tsc-alias&#34;</span><span style=color:#960050;background-color:#1e0010>,</span>
+</code></pre></div>
 <div class="m-1 p-1">
-<a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=https://blog.jsguru.net/categories/systemdesign>systemdesign</a>
+<a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=https://blog.jsguru.net/categories/cheatsheet>cheatsheet</a>
 </div>
 </div>
 </section>
@@ -76,6 +115,15 @@
 <div class="max-w-2xl mx-auto">
 <div class="font-heading text-2xl font-semibold">You Might Also Like</div>
 <div class="mt-8 grid gap-8">
+<ul class=sidebar-links>
+<li><a href=/post/javascript-numeric-precision-issue/>Javascript Numeric Precision Issue</a></li>
+<li><a href=/post/su-dung-firebase-realtime-database-gui-thong-bao/>Sử dụng Firebase Realtime Database để gửi thông báo cho người dùng trong web app</a></li>
+<li><a href=/post/tim-hieu-ve-props-va-state-trong-reactjs/>Tim Hieu Ve Props Va State Trong Reactjs</a></li>
+<li><a href=/post/con-duong-tro-lap-lap-trinh-vien-fullstack-js/>Con đường trở thành lập trình viên fullstack JS</a></li>
+<li><a href=/post/create-new-spa-with-reactjs/>Create New Spa With Reactjs</a></li>
+<li><a href=/post/create-static-blog-with-hugo-and-github-pages-in-5-minutes/>Create Static Blog With Hugo and Github Pages in 5 Minutes</a></li>
+<li><a href=/post/setup-nodejs-development-enviroment-in-5-minutes/>Setup NodeJS Development Environment in 5 Minutes</a></li>
+</ul>
 </div>
 </div>
 </section>
