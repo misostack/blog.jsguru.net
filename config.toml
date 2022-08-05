@@ -1,4 +1,4 @@
-baseURL = '//blog.jsguru.net'
+baseURL = 'https://blog.jsguru.net'
 languageCode = 'en-us'
 title = '1 hour of deep work is better than 8 hours of shallow work'
 theme = '2022'

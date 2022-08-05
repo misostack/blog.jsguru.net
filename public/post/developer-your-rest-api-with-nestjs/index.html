@@ -4,7 +4,7 @@
     
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="home" href="//blog.jsguru.net" />
+    <link rel="home" href="https://blog.jsguru.net" />
     <meta name="generator" content="jsguru cms" />
 
     
@@ -15,23 +15,21 @@
       
               
         
-        <link rel="stylesheet" href="//blog.jsguru.net/themes/2022/public/main.css" />
+        <link rel="stylesheet" href="https://blog.jsguru.net/themes/2022/public/main.css" />
              
     
       
               
         
-        <link rel="stylesheet" href="//blog.jsguru.net/themes/2022/public/home.css" />
+        <link rel="stylesheet" href="https://blog.jsguru.net/themes/2022/public/home.css" />
              
     
       
               
         
-        <link rel="stylesheet" href="//blog.jsguru.net/themes/2022/public/page.css" />
+        <link rel="stylesheet" href="https://blog.jsguru.net/themes/2022/public/page.css" />
              
         
-
-    <title>My New Hugo Site</title>
 
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KK3645K2M"></script>
@@ -42,14 +40,26 @@
 
       gtag('config', 'G-1KK3645K2M');
     </script>    
+    
+<title>Developer Your Rest Api With Nestjs | How to setup a nestjs boillerplate to developer a Restful Api Project | 1 hour of deep work is better than 8 hours of shallow work</title>
+<meta name="robots" content="all" />
+<meta name="keywords" content="nestjs, rest-api, nodejs" />
+<meta name="description" content="How to setup a nestjs boillerplate to developer a Restful Api Project" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://user-images.githubusercontent.com/31009750/179174927-7a62ee24-15c1-4884-875a-57838f31fdcf.png" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="750" />
+<meta property="og:image:height" content="300" />
+
+
   </head>
   <body class="body-nav-fixed">
     <nav class="nav-fixed nav-default z-50">
     <div class="container">
       <div class="nav-container flex flex-wrap justify-between items-center">
-        <a href="//blog.jsguru.net" class="nav-brand inline-block">
+        <a href="https://blog.jsguru.net" class="nav-brand inline-block">
           
-          <img class="h-16" src="//blog.jsguru.net/themes/2022/src/assets/images/2phut-logo.png" 
+          <img class="h-16" src="https://blog.jsguru.net/themes/2022/src/assets/images/2phut-logo.png" 
           alt="Stunning" />
         </a>
         <a href="javascript:void(0);" data-menu="#menu-main_menu" class="nav-menu-toggle"><span
@@ -71,19 +81,23 @@
                 
                     
                     <li class="nav-menu-item"><a class="nav-menu-link" 
-                        href="//blog.jsguru.net/categories/cheatsheet">cheatsheet</a></li>
+                        href="https://blog.jsguru.net/categories/cheatsheet">cheatsheet</a></li>
                 
                     
                     <li class="nav-menu-item"><a class="nav-menu-link" 
-                        href="//blog.jsguru.net/categories/frameworks">frameworks</a></li>
+                        href="https://blog.jsguru.net/categories/frameworks">frameworks</a></li>
                 
                     
                     <li class="nav-menu-item"><a class="nav-menu-link" 
-                        href="//blog.jsguru.net/categories/lifestyle">lifestyle</a></li>
+                        href="https://blog.jsguru.net/categories/java">java</a></li>
                 
                     
                     <li class="nav-menu-item"><a class="nav-menu-link" 
-                        href="//blog.jsguru.net/categories/systemdesign">systemdesign</a></li>
+                        href="https://blog.jsguru.net/categories/lifestyle">lifestyle</a></li>
+                
+                    
+                    <li class="nav-menu-item"><a class="nav-menu-link" 
+                        href="https://blog.jsguru.net/categories/systemdesign">systemdesign</a></li>
                 
             
           
@@ -91,7 +105,7 @@
           
           
             <li class="nav-menu-item">
-            <a class="nav-menu-link" href="//blog.jsguru.net">Tools
+            <a class="nav-menu-link" href="https://blog.jsguru.net">Tools
                 
                     <span class="material-icons">keyboard_arrow_down</span>
                 
@@ -133,18 +147,63 @@
     
   <section class="container section">
     <div class="page-content max-w-2xl mx-auto">
-        <img src="//blog.jsguru.net/common/no-image.png" class="img-responsive" alt="Developer Your Rest Api With Nestjs" />
+        <img src="https://user-images.githubusercontent.com/31009750/179174927-7a62ee24-15c1-4884-875a-57838f31fdcf.png" class="img-responsive" alt="Developer Your Rest Api With Nestjs" />
         <h1>Developer Your Rest Api With Nestjs</h1>
         <p>
             
-            <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href="//blog.jsguru.net/categories/frameworks">frameworks</a>
+            <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href="https://blog.jsguru.net/categories/frameworks">frameworks</a>
             
         </p>
-                
+        <h2 id="ứng-dụng">Ứng dụng</h2>
+<blockquote>
+<p>Xây dựng REST API cung cấp dữ liệu thời gian thực giá vàng</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/31009750/179179969-d1b9fbb0-0b8c-45a1-9892-8d151d6b67b5.png" alt="image"></p>
+<h3 id="tính-năng-cập-nhật-giá-vàng">Tính năng cập nhật giá vàng</h3>
+<ol>
+<li>Cập nhật giá vàng theo ngày : nhập thông thường</li>
+<li>Cập nhật giá vàng hàng loạt: import tập tin excel theo định dạng</li>
+<li>Cập nhật giá vàng tự động: thiết lập link liên kết lấy giá vàng, khoảng thời gian lấy</li>
+</ol>
+<h3 id="tính-năng-hiển-thị-giá-vàng">Tính năng hiển thị giá vàng</h3>
+<blockquote>
+<p>Dạng hiện thị : dạng bảng hoặc dạng biểu đồ</p>
+</blockquote>
+<ol>
+<li>Hiển thị giá vàng theo giờ</li>
+<li>Hiển thị giá vàng theo ngày</li>
+<li>Hiển thị giá vàng theo tuần</li>
+<li>Hiển thị giá vàng theo tháng</li>
+<li>Hiển thị giá vàng theo năm</li>
+</ol>
+<h2 id="phân-tích">Phân tích</h2>
+<p><img src="https://user-images.githubusercontent.com/31009750/179182045-19c02cd0-25be-4282-bd4b-454be7434e9c.png" alt="image">
+<img src="https://user-images.githubusercontent.com/31009750/179182071-307082c3-12c9-4249-b08c-88d29d194e70.png" alt="image"></p>
+<blockquote>
+<p>Output</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/31009750/179183039-29d2c58c-feea-4b9d-955c-01f999eba6da.png" alt="image"></p>
+<p><strong>Lựa chọn database và cách lưu trữ</strong></p>
+<ol>
+<li>MongoDB</li>
+<li>Nested Object</li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/31009750/179183556-3813547e-830e-4e68-89dd-d468d96eb782.png" alt="image"></p>
+<h2 id="coding">Coding</h2>
+<h3 id="database-first">Database first</h3>
+<ol>
+<li><input checked="" disabled="" type="checkbox"> Install mongoose package for NestJS</li>
+<li><input checked="" disabled="" type="checkbox"> Configure mongoose connection</li>
+<li><input checked="" disabled="" type="checkbox"> Create Model</li>
+<li><input checked="" disabled="" type="checkbox"> Generate dataseed</li>
+<li><input checked="" disabled="" type="checkbox"> Write tests for create, read, update, delete</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yarn add @nestjs/mongoose mongoose dotenv uuid
+</span></span></code></pre></div>        
       
       <div class="m-1 p-1">
         
-          <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href="//blog.jsguru.net/categories/frameworks">frameworks</a>
+          <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href="https://blog.jsguru.net/categories/frameworks">frameworks</a>
         
       </div>
     </div>
@@ -159,6 +218,16 @@
         
         <ul class="sidebar-links">
         
+        
+            <li><a href="/post/nestjs-request-and-response-object/">Nestjs Request and Response Object</a></li>
+        
+            <li><a href="/post/nestjs-upload-files/">Nestjs Upload Files</a></li>
+        
+            <li><a href="/post/nestjs-pipes/">Nestjs Pipes</a></li>
+        
+            <li><a href="/post/validate-request-input-in-nestjs/">Validate Request Input in Nestjs</a></li>
+        
+            <li><a href="/post/nestjs-provider/">Nestjs Provider</a></li>
         
             <li><a href="/post/create-new-website-with-nextjs/">Create New Website With Nextjs</a></li>
         
@@ -187,7 +256,17 @@
           <ul class="footer-section-navigation-menu-links">
             
             
-              <li><a href="//blog.jsguru.net/post/developer-your-rest-api-with-nestjs/">Developer Your Rest Api With Nestjs</a></li>              
+              <li><a href="https://blog.jsguru.net/post/nestjs-request-and-response-object/">Nestjs Request and Response Object</a></li>              
+            
+              <li><a href="https://blog.jsguru.net/post/nestjs-upload-files/">Nestjs Upload Files</a></li>              
+            
+              <li><a href="https://blog.jsguru.net/post/nestjs-pipes/">Nestjs Pipes</a></li>              
+            
+              <li><a href="https://blog.jsguru.net/post/validate-request-input-in-nestjs/">Validate Request Input in Nestjs</a></li>              
+            
+              <li><a href="https://blog.jsguru.net/post/nestjs-provider/">Nestjs Provider</a></li>              
+            
+              <li><a href="https://blog.jsguru.net/post/developer-your-rest-api-with-nestjs/">Developer Your Rest Api With Nestjs</a></li>              
              
           </ul>
         </div>
@@ -196,7 +275,7 @@
           <ul class="footer-section-navigation-menu-links">
             
             
-              <li><a href="//blog.jsguru.net/post/create-new-website-with-nextjs/">Create New Website With Nextjs</a></li>              
+              <li><a href="https://blog.jsguru.net/post/create-new-website-with-nextjs/">Create New Website With Nextjs</a></li>              
              
           </ul>
         </div>
@@ -224,7 +303,7 @@
           Powered by <a class="font-bold text-primary" href="https://gohugo.io/">Go Hugo</a> - Made
           with love from <a class="font-bold text-primary" href="https://blog.jsguru.net/">jsguru.net</a> -
           Build
-          Version 2022-07-12 17:09:16 &#43;0700 &#43;07
+          Version 2022-08-05 10:06:04 &#43;0700 &#43;07
         </div>
       </div>
     </footer>
@@ -235,7 +314,7 @@
         
         
         
-          <script type="text/javascript" src="//blog.jsguru.net/core/jquery-3.6.0.min.js"></script>
+          <script type="text/javascript" src="https://blog.jsguru.net/core/jquery-3.6.0.min.js"></script>
         
              
     
@@ -243,7 +322,7 @@
         
         
         
-          <script type="text/javascript" src="//blog.jsguru.net/themes/2022/public/main.js"></script>
+          <script type="text/javascript" src="https://blog.jsguru.net/themes/2022/public/main.js"></script>
         
              
     
@@ -251,7 +330,7 @@
         
         
         
-          <script type="text/javascript" src="//blog.jsguru.net/themes/2022/public/home.js"></script>
+          <script type="text/javascript" src="https://blog.jsguru.net/themes/2022/public/home.js"></script>
         
              
         
