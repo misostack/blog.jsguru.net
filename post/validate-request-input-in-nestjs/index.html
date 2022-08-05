@@ -67,6 +67,7 @@
 <p>
 <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=//blog.jsguru.net/categories/frameworks>frameworks</a>
 </p>
+<p><strong>Note</strong>: All of demo source code you can find our in github <a href=https://github.com/misostack/finance.api.sonnm.com>nestjs boilerplate</a></p>
 <blockquote>
 <p>It is best practice to validate the correctness of any data sent into a web application</p>
 </blockquote>
@@ -281,35 +282,10 @@
 </blockquote>
 <p><img src=https://user-images.githubusercontent.com/31009750/181744094-25b6e6fd-08de-42de-8bf0-b48c115d7e45.png alt=image></p>
 <h2 id=lets-dive-in-more-details-with-nestjs-standard-approach>Let&rsquo;s dive in more details with NestJS standard approach</h2>
-<p>As you&rsquo;ve known, in a request we will have:</p>
-<ul>
-<li>Route Params ( included in URL )</li>
-<li>Query Params ( included in URL )</li>
-<li>Body ( json/form-data/multipart/form-data )</li>
-</ul>
 <blockquote>
-<p>There are 2 ways to get these values</p>
+<p>NestJS provide us a built-in pipe which includes class-validator and class transformer.</p>
 </blockquote>
-<h3 id=standard-using-nestjs-pipes>Standard using NestJS Pipes</h3>
-<p><strong>What is Pipe?</strong></p>
-<blockquote>
-<p>A pipe is a class annotated with the @Injectable() decorator, which implements the PipeTransform interface</p>
-</blockquote>
-<blockquote>
-<p>Pipes operate on the arguments being processed by a controller route handler.</p>
-</blockquote>
-<blockquote>
-<p>Nest interposes a pipe just before a method is invoked, and the pipe receives the arguments destined for the method and operates on them</p>
-</blockquote>
-<p>So that, we can use pipes in two typical use cases:</p>
-<ol>
-<li>Transformation : transform input data to the desired form</li>
-<li>Validation : evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception when the data is incorrect</li>
-</ol>
-<blockquote>
-<p>Let&rsquo;s get back to our example</p>
-</blockquote>
-<p>In NestJS we have some built-in pipes for transformation</p>
+<p><a href=/post/nestjs-pipes/>Using NestJS Pipes to Validate your Data</a></p>
 <div class="m-1 p-1">
 <a class="m-1 p-1 text-xs font-bold leading-none border border-gray-200 bg-white" href=//blog.jsguru.net/categories/frameworks>frameworks</a>
 </div>
@@ -320,6 +296,8 @@
 <div class="font-heading text-2xl font-semibold">You Might Also Like</div>
 <div class="mt-8 grid gap-8">
 <ul class=sidebar-links>
+<li><a href=/post/nestjs-request-and-response-object/>Nestjs Request and Response Object</a></li>
+<li><a href=/post/nestjs-upload-files/>Nestjs Upload Files</a></li>
 <li><a href=/post/nestjs-pipes/>Nestjs Pipes</a></li>
 <li><a href=/post/nestjs-provider/>Nestjs Provider</a></li>
 <li><a href=/post/developer-your-rest-api-with-nestjs/>Developer Your Rest Api With Nestjs</a></li>
@@ -344,6 +322,8 @@ PRODUCTION MODE
 <div class="footer-section-navigation-menu basis-1/5">
 <h4 class=footer-heading>NestJS</h4>
 <ul class=footer-section-navigation-menu-links>
+<li><a href=//blog.jsguru.net/post/nestjs-request-and-response-object/>Nestjs Request and Response Object</a></li>
+<li><a href=//blog.jsguru.net/post/nestjs-upload-files/>Nestjs Upload Files</a></li>
 <li><a href=//blog.jsguru.net/post/nestjs-pipes/>Nestjs Pipes</a></li>
 <li><a href=//blog.jsguru.net/post/validate-request-input-in-nestjs/>Validate Request Input in Nestjs</a></li>
 <li><a href=//blog.jsguru.net/post/nestjs-provider/>Nestjs Provider</a></li>
@@ -380,7 +360,7 @@ Copyright @ blog.jsguru.net 2022
 Powered by <a class="font-bold text-primary" href=https://gohugo.io/>Go Hugo</a> - Made
 with love from <a class="font-bold text-primary" href=https://blog.jsguru.net/>jsguru.net</a> -
 Build
-Version 2022-08-04 10:46:09 +0700 +0700
+Version 2022-08-05 10:06:04 +0700 +0700
 </div>
 </div>
 </footer>
