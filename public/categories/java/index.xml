@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>java on 1 hour of deep work is better than 8 hours of shallow work</title>
-    <link>https://blog.jsguru.net/categories/java/</link>
-    <description>Recent content in java on 1 hour of deep work is better than 8 hours of shallow work</description>
+    <title>java on Useful NodeJS Tricks, JavaScript Tips, Tricks and Best Practices</title>
+    <link>https://nextjsvietnam.com/categories/java/</link>
+    <description>Recent content in java on Useful NodeJS Tricks, JavaScript Tips, Tricks and Best Practices</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Jul 2022 09:04:17 +0700</lastBuildDate><atom:link href="https://blog.jsguru.net/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 09:04:17 +0700</lastBuildDate><atom:link href="https://nextjsvietnam.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java for Professional</title>
-      <link>https://blog.jsguru.net/post/java-for-professional/</link>
+      <link>https://nextjsvietnam.com/post/java-for-professional/</link>
       <pubDate>Wed, 20 Jul 2022 09:04:17 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/post/java-for-professional/</guid>
+      <guid>https://nextjsvietnam.com/post/java-for-professional/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java for Pre Intermediate</title>
-      <link>https://blog.jsguru.net/post/java-for-pre-intermediate/</link>
+      <link>https://nextjsvietnam.com/post/java-for-pre-intermediate/</link>
       <pubDate>Wed, 20 Jul 2022 09:04:00 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/post/java-for-pre-intermediate/</guid>
+      <guid>https://nextjsvietnam.com/post/java-for-pre-intermediate/</guid>
       <description>Java Advanced APIs Java EE Essentials Java EE Tutorial References Java point EE </description>
     </item>
     
     <item>
       <title>Java for Beginner</title>
-      <link>https://blog.jsguru.net/post/java-for-beginner/</link>
+      <link>https://nextjsvietnam.com/post/java-for-beginner/</link>
       <pubDate>Wed, 20 Jul 2022 09:03:37 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/post/java-for-beginner/</guid>
+      <guid>https://nextjsvietnam.com/post/java-for-beginner/</guid>
       <description>Materials Java Beginner Learning Path Java Developer Center Overview Architecture Java Platform
 What can Java do?
 Development Tools Netbeans IntelliJ IDEA Setup Development Environment Install Java Install JDK &amp;amp; JRE What does Java 8 Packages include ?

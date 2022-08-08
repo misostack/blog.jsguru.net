@@ -7,14 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#90cf43",
+        primary: "#026e00",
       },
       fontFamily: {
         body: ["arial"],
         heading: ["'Merriweather', serif"],
       },
       textColor: {
-        primary: "#90cf43",
+        primary: "#026e00",
       },
       backgroundColor: {
         primary: "#8cc43d",

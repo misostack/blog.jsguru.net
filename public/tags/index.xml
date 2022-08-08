@@ -1,108 +1,135 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 1 hour of deep work is better than 8 hours of shallow work</title>
-    <link>https://blog.jsguru.net/tags/</link>
-    <description>Recent content in Tags on 1 hour of deep work is better than 8 hours of shallow work</description>
+    <title>Tags on Useful NodeJS Tricks, JavaScript Tips, Tricks and Best Practices</title>
+    <link>https://nextjsvietnam.com/tags/</link>
+    <description>Recent content in Tags on Useful NodeJS Tricks, JavaScript Tips, Tricks and Best Practices</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Aug 2022 10:06:04 +0700</lastBuildDate><atom:link href="https://blog.jsguru.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Aug 2022 20:07:21 +0700</lastBuildDate><atom:link href="https://nextjsvietnam.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tailwindcss</title>
+      <link>https://nextjsvietnam.com/tags/tailwindcss/</link>
+      <pubDate>Fri, 05 Aug 2022 20:07:21 +0700</pubDate>
+      
+      <guid>https://nextjsvietnam.com/tags/tailwindcss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vuejs</title>
+      <link>https://nextjsvietnam.com/tags/vuejs/</link>
+      <pubDate>Fri, 05 Aug 2022 20:07:21 +0700</pubDate>
+      
+      <guid>https://nextjsvietnam.com/tags/vuejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>typescript</title>
+      <link>https://nextjsvietnam.com/tags/typescript/</link>
+      <pubDate>Fri, 05 Aug 2022 15:07:40 +0700</pubDate>
+      
+      <guid>https://nextjsvietnam.com/tags/typescript/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>nestjs</title>
-      <link>https://blog.jsguru.net/tags/nestjs/</link>
+      <link>https://nextjsvietnam.com/tags/nestjs/</link>
       <pubDate>Fri, 05 Aug 2022 10:06:04 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/nestjs/</guid>
+      <guid>https://nextjsvietnam.com/tags/nestjs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>đạo đức</title>
-      <link>https://blog.jsguru.net/tags/%C4%91%E1%BA%A1o-%C4%91%E1%BB%A9c/</link>
+      <link>https://nextjsvietnam.com/tags/%C4%91%E1%BA%A1o-%C4%91%E1%BB%A9c/</link>
       <pubDate>Thu, 28 Jul 2022 09:18:57 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/%C4%91%E1%BA%A1o-%C4%91%E1%BB%A9c/</guid>
+      <guid>https://nextjsvietnam.com/tags/%C4%91%E1%BA%A1o-%C4%91%E1%BB%A9c/</guid>
       <description></description>
     </item>
     
     <item>
       <title>java</title>
-      <link>https://blog.jsguru.net/tags/java/</link>
+      <link>https://nextjsvietnam.com/tags/java/</link>
       <pubDate>Wed, 20 Jul 2022 09:04:17 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/java/</guid>
+      <guid>https://nextjsvietnam.com/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>spring</title>
-      <link>https://blog.jsguru.net/tags/spring/</link>
+      <link>https://nextjsvietnam.com/tags/spring/</link>
       <pubDate>Wed, 20 Jul 2022 09:04:17 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/spring/</guid>
+      <guid>https://nextjsvietnam.com/tags/spring/</guid>
       <description></description>
     </item>
     
     <item>
       <title>design-patterns</title>
-      <link>https://blog.jsguru.net/tags/design-patterns/</link>
+      <link>https://nextjsvietnam.com/tags/design-patterns/</link>
       <pubDate>Wed, 20 Jul 2022 09:04:00 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/design-patterns/</guid>
+      <guid>https://nextjsvietnam.com/tags/design-patterns/</guid>
       <description></description>
     </item>
     
     <item>
       <title>java-core</title>
-      <link>https://blog.jsguru.net/tags/java-core/</link>
+      <link>https://nextjsvietnam.com/tags/java-core/</link>
       <pubDate>Wed, 20 Jul 2022 09:04:00 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/java-core/</guid>
+      <guid>https://nextjsvietnam.com/tags/java-core/</guid>
       <description></description>
     </item>
     
     <item>
       <title>java-ee</title>
-      <link>https://blog.jsguru.net/tags/java-ee/</link>
+      <link>https://nextjsvietnam.com/tags/java-ee/</link>
       <pubDate>Wed, 20 Jul 2022 09:04:00 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/java-ee/</guid>
+      <guid>https://nextjsvietnam.com/tags/java-ee/</guid>
       <description></description>
     </item>
     
     <item>
       <title>reactjs</title>
-      <link>https://blog.jsguru.net/tags/reactjs/</link>
+      <link>https://nextjsvietnam.com/tags/reactjs/</link>
       <pubDate>Tue, 12 Jul 2022 15:14:47 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/reactjs/</guid>
+      <guid>https://nextjsvietnam.com/tags/reactjs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>nodejs</title>
-      <link>https://blog.jsguru.net/tags/nodejs/</link>
+      <link>https://nextjsvietnam.com/tags/nodejs/</link>
       <pubDate>Tue, 12 Jul 2022 11:39:11 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/nodejs/</guid>
+      <guid>https://nextjsvietnam.com/tags/nodejs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>nextjs</title>
-      <link>https://blog.jsguru.net/tags/nextjs/</link>
+      <link>https://nextjsvietnam.com/tags/nextjs/</link>
       <pubDate>Tue, 12 Jul 2022 11:38:00 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/nextjs/</guid>
+      <guid>https://nextjsvietnam.com/tags/nextjs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hugo</title>
-      <link>https://blog.jsguru.net/tags/hugo/</link>
+      <link>https://nextjsvietnam.com/tags/hugo/</link>
       <pubDate>Tue, 21 Jun 2022 15:43:50 +0700</pubDate>
       
-      <guid>https://blog.jsguru.net/tags/hugo/</guid>
+      <guid>https://nextjsvietnam.com/tags/hugo/</guid>
       <description></description>
     </item>
     

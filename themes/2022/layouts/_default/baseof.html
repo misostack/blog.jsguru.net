@@ -48,8 +48,8 @@
       <div class="container md:flex">
         <section class="footer-section-info md:basis-1/4">
           <div class="address">
-            <a class="logo" href="/" title="JSBase Vietnam">
-              JSBASEVIETNAM
+            <a class="logo" href="{{.Site.BaseURL}}" title="{{ .Site.Params.name }}">
+              {{ .Site.Params.name }}
             </a>
             <h4 class="footer-heading">
               {{ if hugo.IsProduction }} PRODUCTION MODE {{ end }} {{ if not
@@ -91,11 +91,11 @@
           <a href=""><span class="material-icons text-4xl  m-4">smart_display</span></a>
         </div>
         <div class="text-center text-lg py-4">
-          Copyright @ blog.jsguru.net 2022
+          Copyright @ {{ .Site.Params.name }} 2022
         </div>
         <div class="text-center text-sm">
           Powered by <a class="font-bold text-primary" href="https://gohugo.io/">Go Hugo</a> - Made
-          with love from <a class="font-bold text-primary" href="https://blog.jsguru.net/">jsguru.net</a> -
+          with love from <a class="font-bold text-primary" href="{{ .Site.BaseURL }}">{{ .Site.Params.name }}</a> -
           Build
           Version {{.Site.LastChange}}
         </div>

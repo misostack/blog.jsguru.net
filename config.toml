@@ -1,10 +1,10 @@
-baseURL = 'https://blog.jsguru.net'
+baseURL = 'https://nextjsvietnam.com'
 languageCode = 'en-us'
 title = 'Useful NodeJS Tricks, JavaScript Tips, Tricks and Best Practices'
 theme = '2022'
 ignoreFiles = ['\assets\node_modules\.*']
 [params]
-    name = "JSGuru"
+    name = "NextJSVietNam"
     description = "NodeJS Tricks, JavaScript Tips to Make You a Better Programmer"
     keywords = "Nodejs Tricks, Javascript Tips"
     dateFormat = "2006-01-02 15:04:05"
