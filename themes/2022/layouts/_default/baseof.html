@@ -12,6 +12,9 @@
       {{ $themePath = "themes/2022/dist/" }}
     {{ end }}
 
+    <!-- Load fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <!-- Load stylesheets -->
     {{ range $style := .Site.Data.assets.styles }}
       {{ if eq $style.theme "2022" }}
@@ -20,6 +23,7 @@
         <link rel="stylesheet" href="{{$mainStyle.Permalink}}" />
       {{ end }}       
     {{ end }}    
+    
     <!-- Bing -->
     <meta name="msvalidate.01" content="{{.Site.Params.BingCode}}" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
