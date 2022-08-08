@@ -1,14 +1,14 @@
 baseURL = 'https://blog.jsguru.net'
 languageCode = 'en-us'
-title = '1 hour of deep work is better than 8 hours of shallow work'
+title = 'Useful NodeJS Tricks, JavaScript Tips, Tricks and Best Practices'
 theme = '2022'
 ignoreFiles = ['\assets\node_modules\.*']
 [params]
-    name = "MISOSTACK"
-    description = "NHATKIDUAN.MISOSTACK.COM là một blog để lưu lại các kiến thức, kinh nghiệm trong quá trình xây dựng một website hay ứng dụng"
-    keywords = "nhat ki du an"
+    name = "JSGuru"
+    description = "NodeJS Tricks, JavaScript Tips to Make You a Better Programmer"
+    keywords = "Nodejs Tricks, Javascript Tips"
     dateFormat = "2006-01-02 15:04:05"
-    image = "/pages/home/nhat-ki-du-an.jpg"
+    image = "/themes/2022/src/assets/images/logo.png"
     blog_pager = 10
     note_pager = 10
     article_pager = 10
